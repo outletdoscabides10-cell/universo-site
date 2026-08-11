@@ -494,8 +494,17 @@
     <p class="cart-empty" id="cartEmpty">Seu carrinho está vazio.<br>Escolha os produtos na vitrine 😉</p>
 
     <div class="cart-foot" id="cartFoot" hidden>
+      <div class="cart-cep" id="cartCepBox">
+        <div class="cart-cep-row">
+          <input type="text" id="cartCep" placeholder="Seu CEP" inputmode="numeric" maxlength="9" autocomplete="postal-code">
+          <button class="btn btn-ghost btn-sm" id="cartCalcFrete">Calcular frete</button>
+        </div>
+        <div class="frete-opcoes" id="freteOpcoes"></div>
+      </div>
       <div class="cart-total"><span>Subtotal</span><strong id="cartTotal">R$ 0,00</strong></div>
-      <p class="cart-note">Frete e prazo são confirmados no atendimento, antes de você pagar.</p>
+      <div class="cart-total cart-total-frete" id="linhaFrete" hidden><span id="freteLabel">Frete</span><strong id="freteValor"></strong></div>
+      <div class="cart-total cart-total-final" id="linhaTotal" hidden><span>Total</span><strong id="totalFinal"></strong></div>
+      <p class="cart-note" id="cartNote">Frete e prazo são confirmados no atendimento, antes de você pagar.</p>
       <input type="text" id="cartNome" placeholder="Seu nome" autocomplete="name">
       <input type="tel" id="cartFone" placeholder="Seu WhatsApp com DDD" inputmode="tel" autocomplete="tel">
       <button class="btn btn-primary" id="cartPayOnline">

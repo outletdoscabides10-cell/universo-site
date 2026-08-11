@@ -260,6 +260,80 @@ function cartSubtotal() {
   }, 0);
 }
 
+/* ---- Frete ---- */
+let freteSel = null;
+
+function resetFrete() {
+  freteSel = null;
+  const box = document.getElementById('freteOpcoes');
+  if (box) box.innerHTML = '';
+  atualizarTotais();
+}
+
+function atualizarTotais() {
+  const linhaFrete = document.getElementById('linhaFrete');
+  const linhaTotal = document.getElementById('linhaTotal');
+  if (!linhaFrete) return;
+  if (freteSel) {
+    document.getElementById('freteLabel').textContent = `Frete (${freteSel.nome})`;
+    document.getElementById('freteValor').textContent = money(freteSel.valor);
+    document.getElementById('totalFinal').textContent = money(cartSubtotal() + freteSel.valor);
+    linhaFrete.hidden = false;
+    linhaTotal.hidden = false;
+    document.getElementById('cartNote').textContent = 'Frete estimado — se houver diferença, confirmamos antes de enviar.';
+  } else {
+    linhaFrete.hidden = true;
+    linhaTotal.hidden = true;
+  }
+}
+
+async function calcularFrete() {
+  const cep = document.getElementById('cartCep').value.replace(/\D/g, '');
+  const box = document.getElementById('freteOpcoes');
+  if (cep.length !== 8) {
+    box.innerHTML = '<p class="frete-erro">Digita o CEP completo (8 números).</p>';
+    return;
+  }
+  const itens = Object.entries(cart)
+    .filter(([slug]) => prodBySlug(slug))
+    .map(([slug, qtd]) => {
+      const p = prodBySlug(slug);
+      return { slug, nome: p.nome, preco: p.preco, qtd, cat: p.cats[0] };
+    });
+  box.innerHTML = '<p class="frete-erro">Calculando...</p>';
+  try {
+    const r = await fetch(`${BACKEND_SITE}/frete`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ cep, itens }),
+    });
+    const d = await r.json();
+    if (d.indisponivel) {
+      document.getElementById('cartCepBox').hidden = true;
+      return;
+    }
+    if (!d.ok || !d.opcoes?.length) {
+      box.innerHTML = '<p class="frete-erro">Não achamos frete pra esse CEP — fecha pelo WhatsApp que a gente cota pra você.</p>';
+      return;
+    }
+    box.innerHTML = d.opcoes.map((o, i) => `
+      <label class="frete-op">
+        <input type="radio" name="freteOp" value="${i}">
+        <span class="frete-op-info"><b>${esc(o.nome)}${o.transportadora ? ' · ' + esc(o.transportadora) : ''}</b><small>até ${o.prazo} dias úteis</small></span>
+        <strong>${money(o.valor)}</strong>
+      </label>`).join('');
+    box.querySelectorAll('input[name="freteOp"]').forEach((inp) =>
+      inp.addEventListener('change', () => {
+        const o = d.opcoes[parseInt(inp.value, 10)];
+        freteSel = { nome: o.nome, valor: o.valor, prazo: o.prazo, cep };
+        atualizarTotais();
+      })
+    );
+  } catch (e) {
+    box.innerHTML = '<p class="frete-erro">Não deu pra calcular agora — fecha pelo WhatsApp que a gente cota na hora.</p>';
+  }
+}
+
 function renderCart() {
   const entries = Object.entries(cart).filter(([slug]) => prodBySlug(slug));
   cartItemsEl.innerHTML = entries.map(([slug, qtd]) => {
@@ -285,6 +359,7 @@ function renderCart() {
   cartTotalEl.textContent = money(cartSubtotal());
   cartBadge.hidden = n === 0;
   cartBadge.textContent = n;
+  resetFrete(); /* carrinho mudou => cotação anterior não vale mais */
 }
 
 function openCart() {
@@ -317,6 +392,10 @@ function addToCart(slug) {
 
 document.getElementById('cartOpen').addEventListener('click', openCart);
 document.getElementById('cartClose').addEventListener('click', closeCart);
+document.getElementById('cartCalcFrete').addEventListener('click', calcularFrete);
+document.getElementById('cartCep').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); calcularFrete(); }
+});
 cartBackdrop.addEventListener('click', closeCart);
 document.addEventListener('keydown', (e) => {
   if (e.key === 'Escape') closeCart();
@@ -361,7 +440,8 @@ function dadosDoCarrinho() {
       return { slug, nome: p.nome, preco: p.preco, qtd };
     });
   if (!itens.length) return null;
-  return { nome, fone, itens, total: money(cartSubtotal()) };
+  const totalNum = cartSubtotal() + (freteSel ? freteSel.valor : 0);
+  return { nome, fone, itens, frete: freteSel, total: money(totalNum) };
 }
 
 /* grava o pedido e devolve o id (null se falhar).
@@ -386,7 +466,7 @@ async function registrarPedido(d) {
         'Content-Type': 'application/json',
         Prefer: 'return=minimal',
       },
-      body: JSON.stringify({ id, nome: d.nome, telefone: d.fone, itens: d.itens, total: d.total }),
+      body: JSON.stringify({ id, nome: d.nome, telefone: d.fone, itens: d.itens, frete: d.frete, total: d.total }),
     });
     return r.ok ? id : null;
   } catch (e) {
@@ -419,7 +499,7 @@ document.getElementById('cartPayOnline').addEventListener('click', async () => {
     const r = await fetch(`${BACKEND_SITE}/checkout`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pedido_id: pedidoId, itens: d.itens }),
+      body: JSON.stringify({ pedido_id: pedidoId, itens: d.itens, frete: d.frete }),
     });
     const resp = await r.json();
     if (resp.ok && resp.init_point) {
@@ -445,7 +525,10 @@ document.getElementById('cartCheckout').addEventListener('click', async () => {
   const pedidoId = await registrarPedido(d);
 
   const linhas = d.itens.map((i) => `• ${i.qtd}x ${i.nome} — R$ ${i.preco}`).join('\n');
-  const msg = `Olá! Fiz um pedido pelo site 🛒\n\n${linhas}\n\nSubtotal: ${d.total}\nNome: ${d.nome}\nWhatsApp: ${d.fone}`;
+  const freteTxt = d.frete
+    ? `\nFrete (${d.frete.nome} · até ${d.frete.prazo} dias úteis): ${money(d.frete.valor)}\nCEP: ${d.frete.cep}`
+    : '';
+  const msg = `Olá! Fiz um pedido pelo site 🛒\n\n${linhas}${freteTxt}\n\nTotal: ${d.total}\nNome: ${d.nome}\nWhatsApp: ${d.fone}`;
 
   cart = {};
   saveCart();
