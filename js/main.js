@@ -7,8 +7,8 @@
 const CANAIS = {
   whatsapp: '5511952300060',               // WhatsApp oficial da loja
   instagram: 'https://www.instagram.com',  // TODO: link do perfil, ex: https://instagram.com/universodoscabides
-  ml: 'https://www.mercadolivre.com.br',   // TODO: link da loja no Mercado Livre (só aparece no rodapé)
-  shopee: 'https://shopee.com.br',         // TODO: link da loja na Shopee (só aparece no rodapé)
+  ml: 'https://perfil.mercadolivre.com.br/UNIVERSO_DOS_CABIDES_BRASIL',
+  shopee: 'https://shopee.com.br/universodoscabidesbrasil',
 };
 
 /* Link de pedido: WhatsApp com mensagem pronta (fallback ML enquanto
