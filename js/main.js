@@ -6,7 +6,7 @@
 /* ---- CONFIGURE AQUI OS CANAIS DA MARCA ---- */
 const CANAIS = {
   whatsapp: '5511952300060',               // WhatsApp oficial da loja
-  instagram: 'https://www.instagram.com',  // TODO: link do perfil, ex: https://instagram.com/universodoscabides
+  instagram: 'https://www.instagram.com/universodoscabides10',
   ml: 'https://perfil.mercadolivre.com.br/UNIVERSO_DOS_CABIDES_BRASIL',
   shopee: 'https://shopee.com.br/universodoscabidesbrasil',
 };
