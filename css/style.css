@@ -812,9 +812,9 @@ button { font-family: inherit; }
   position: relative;
   display: grid;
   place-items: center;
-  background: linear-gradient(160deg, #f7f9fc, #eef2f8);
-  height: 210px;
-  padding: 22px;
+  background: #fff;
+  height: 220px;
+  padding: 14px;
   overflow: hidden;
 }
 .prod-photo img {
