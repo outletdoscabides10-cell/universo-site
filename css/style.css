@@ -1801,6 +1801,39 @@ button { font-family: inherit; }
 }
 .pv-thumb img { width: 100%; height: 100%; object-fit: contain; }
 .pv-thumb.is-on { border-color: var(--navy-900); }
+.pv-thumbs { flex-wrap: wrap; }
+.pv-thumb { position: relative; overflow: visible; }
+.pv-tag {
+  position: absolute;
+  left: 50%;
+  bottom: -7px;
+  transform: translateX(-50%);
+  font-size: 8px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--navy-900);
+  padding: 1px 6px;
+  border-radius: 2px;
+  white-space: nowrap;
+  pointer-events: none;
+}
+.pv-thumb-play {
+  display: grid;
+  place-items: center;
+  background: var(--navy-900);
+  border-color: var(--navy-900);
+}
+.pv-thumb-play .pv-play-ico { color: #fff; font-size: 18px; line-height: 1; }
+.pv-thumb-play .pv-tag { background: var(--gold-600); }
+.pv-thumb-play.is-on { border-color: var(--gold-600); }
+@keyframes pvZoom {
+  from { opacity: 0.25; transform: scale(0.96); }
+  30% { opacity: 1; }
+  to { opacity: 1; transform: scale(1.04); }
+}
+#pvImg.pv-anim { animation: pvZoom 1.8s ease-in-out; }
 
 .pv-info { padding: 46px 42px 36px; overflow-y: auto; }
 .pv-cat {

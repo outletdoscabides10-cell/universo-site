@@ -522,6 +522,13 @@ grid.addEventListener('click', (e) => {
    ================================================================ */
 let pvSlug = null;
 let pvQuantidade = 1;
+let pvTimer = null;
+
+function pararApresentacao() {
+  if (pvTimer) { clearInterval(pvTimer); pvTimer = null; }
+  const img = document.getElementById('pvImg');
+  if (img) img.classList.remove('pv-anim');
+}
 
 function abrirProduto(slug) {
   const p = prodBySlug(slug);
@@ -537,18 +544,47 @@ function abrirProduto(slug) {
     : 'Vendido por unidade';
   document.getElementById('pvWhats').href = buyHref('o produto ' + p.nome);
 
-  const n = p.fotos || 1;
-  const srcs = Array.from({ length: n }, (_, i) => `assets/products/${slug}${i ? '-' + (i + 1) : ''}.webp`);
-  document.getElementById('pvImg').src = srcs[0];
-  document.getElementById('pvThumbs').innerHTML = n > 1
-    ? srcs.map((s, i) => `<button class="pv-thumb${i === 0 ? ' is-on' : ''}" data-src="${s}"><img src="${s}" alt=""></button>`).join('')
-    : '';
-  document.getElementById('pvThumbs').querySelectorAll('.pv-thumb').forEach((t) =>
+  const sufixos = (p.galeria && p.galeria.length)
+    ? p.galeria
+    : Array.from({ length: p.fotos || 1 }, (_, i) => (i ? '-' + (i + 1) : ''));
+  const srcs = sufixos.map((s) => `assets/products/${slug}${s}.webp`);
+  const ROTULO = { '-med': 'Medidas', '-det': 'Detalhe' };
+  pararApresentacao();
+  const img = document.getElementById('pvImg');
+  img.src = srcs[0];
+  const thumbs = srcs.map((s, i) => {
+    const rot = ROTULO[sufixos[i]];
+    return `<button class="pv-thumb${i === 0 ? ' is-on' : ''}" data-src="${s}">` +
+      `<img src="${s}" alt="" loading="lazy">${rot ? `<span class="pv-tag">${rot}</span>` : ''}</button>`;
+  });
+  if (srcs.length > 1) {
+    thumbs.push('<button class="pv-thumb pv-thumb-play" id="pvPlay" title="Apresentação">' +
+      '<span class="pv-play-ico">&#9654;</span><span class="pv-tag">Ver girando</span></button>');
+  }
+  document.getElementById('pvThumbs').innerHTML = srcs.length > 1 ? thumbs.join('') : '';
+  document.getElementById('pvThumbs').querySelectorAll('.pv-thumb:not(.pv-thumb-play)').forEach((t) =>
     t.addEventListener('click', () => {
-      document.getElementById('pvImg').src = t.dataset.src;
+      pararApresentacao();
+      img.src = t.dataset.src;
       document.querySelectorAll('.pv-thumb').forEach((x) => x.classList.toggle('is-on', x === t));
     })
   );
+  const play = document.getElementById('pvPlay');
+  if (play) play.addEventListener('click', () => {
+    if (pvTimer) { pararApresentacao(); return; }
+    document.querySelectorAll('.pv-thumb').forEach((x) => x.classList.toggle('is-on', x === play));
+    let i = 0;
+    img.classList.add('pv-anim');
+    const passo = () => {
+      img.classList.remove('pv-anim');
+      void img.offsetWidth;
+      img.src = srcs[i % srcs.length];
+      img.classList.add('pv-anim');
+      i++;
+    };
+    passo();
+    pvTimer = setInterval(passo, 1800);
+  });
 
   const wrap = document.getElementById('pvDescWrap');
   if (p.desc) {
@@ -565,6 +601,7 @@ function abrirProduto(slug) {
 }
 
 function fecharProduto() {
+  pararApresentacao();
   const bd = document.getElementById('pvBackdrop');
   if (!bd || bd.hidden) return;
   bd.classList.remove('is-open');
