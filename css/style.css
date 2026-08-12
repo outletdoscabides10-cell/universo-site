@@ -1496,3 +1496,125 @@ button { font-family: inherit; }
   .slide-word { font-size: clamp(90px, 26vw, 140px); }
   .wa-float { right: 16px; bottom: 16px; }
 }
+
+
+/* ---------------- Roleta da sorte ---------------- */
+.roleta-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 95;
+  background: rgba(13, 31, 60, 0.55);
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  opacity: 0;
+  transition: opacity 300ms ease;
+}
+.roleta-backdrop.is-open { opacity: 1; }
+
+.roleta-modal {
+  position: relative;
+  width: min(430px, 100%);
+  background: linear-gradient(165deg, #fdf7ee, #f3e6d0);
+  border-radius: 26px;
+  box-shadow: 0 40px 90px rgba(0, 0, 0, 0.35);
+  padding: 30px 28px 34px;
+  text-align: center;
+  transform: translateY(14px) scale(0.97);
+  transition: transform 350ms var(--ease-out);
+}
+.roleta-backdrop.is-open .roleta-modal { transform: translateY(0) scale(1); }
+
+.roleta-fechar {
+  position: absolute;
+  top: 14px;
+  right: 16px;
+  width: 36px;
+  height: 36px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(13, 31, 60, 0.08);
+  color: var(--navy-800);
+  font-size: 15px;
+  cursor: pointer;
+}
+.roleta-cabeca h3 { font-size: 26px; font-weight: 800; color: var(--navy-900); }
+.roleta-cabeca p { font-size: 14px; color: #6b5d49; margin: 4px 0 20px; }
+
+.roleta-palco {
+  position: relative;
+  width: 290px;
+  height: 290px;
+  margin: 0 auto 24px;
+}
+.roleta-disco {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 10px solid var(--navy-900);
+  box-shadow: 0 14px 34px rgba(13, 31, 60, 0.3), inset 0 0 0 4px rgba(255, 255, 255, 0.35);
+  background: conic-gradient(
+    var(--navy-800) 0deg 90deg,
+    var(--gold-500) 90deg 180deg,
+    var(--blue-600) 180deg 270deg,
+    var(--green-600) 270deg 360deg
+  );
+  position: relative;
+}
+.roleta-fatia {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 92px;
+  text-align: center;
+  font-size: 19px;
+  font-weight: 800;
+  line-height: 1.15;
+  color: #fff;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
+  transform-origin: 0 0;
+}
+.roleta-fatia.f1 { transform: rotate(45deg) translate(56px, -46px) rotate(-45deg); }
+.roleta-fatia.f2 { transform: rotate(135deg) translate(56px, -46px) rotate(-135deg); color: var(--navy-900); text-shadow: none; }
+.roleta-fatia.f3 { transform: rotate(225deg) translate(56px, -46px) rotate(-225deg); }
+.roleta-fatia.f4 { transform: rotate(315deg) translate(56px, -46px) rotate(-315deg); }
+
+.roleta-ponteiro {
+  position: absolute;
+  top: -8px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+  width: 0;
+  height: 0;
+  border-left: 16px solid transparent;
+  border-right: 16px solid transparent;
+  border-top: 26px solid var(--gold-600);
+  filter: drop-shadow(0 3px 4px rgba(0, 0, 0, 0.3));
+}
+.roleta-miolo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 2;
+  width: 54px;
+  height: 54px;
+  border-radius: 50%;
+  background: #fff;
+  border: 4px solid var(--navy-900);
+  display: grid;
+  place-items: center;
+  font-size: 22px;
+  color: var(--gold-600);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+}
+
+.roleta-premio { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+.roleta-parabens { font-size: 20px; font-weight: 800; color: var(--navy-900); }
+.roleta-premio .cupom-pill { margin-bottom: 4px; background: #fff; }
+.roleta-validade { font-size: 13px; color: #6b5d49; }
+
+@media (prefers-reduced-motion: reduce) {
+  .roleta-backdrop, .roleta-modal { transition: none; }
+}

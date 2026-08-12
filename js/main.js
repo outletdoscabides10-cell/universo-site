@@ -264,14 +264,37 @@ function cartSubtotal() {
 let freteSel = null;
 let cupom = null;
 
-const CUPONS = { PRIMEIRA10: 10 }; // código: % de desconto
+const CUPONS = {
+  PRIMEIRA10: { pct: 10 },
+  ROLETA10: { pct: 10, roleta: true },
+  ROLETA5: { pct: 5, roleta: true },
+  ROLETA10OFF: { valor: 10, roleta: true },
+  ROLETA20OFF: { valor: 20, roleta: true },
+};
+
+function cupomRoletaValido() {
+  try {
+    const rc = JSON.parse(localStorage.getItem('univ_roleta') || 'null');
+    if (rc && rc.expira > Date.now()) return rc;
+  } catch (e) { /* noop */ }
+  return null;
+}
 
 function aplicarCupom() {
   const campo = document.getElementById('cartCupom');
   const codigo = campo.value.trim().toUpperCase();
   if (!codigo) return;
-  if (CUPONS[codigo]) {
-    cupom = { codigo, pct: CUPONS[codigo] };
+  const def = CUPONS[codigo];
+  const rc = cupomRoletaValido();
+  if (def && def.roleta && (!rc || rc.codigo !== codigo)) {
+    cupom = null;
+    cartFeedback.textContent = 'Esse cupom da roleta expirou (vale 3 dias) — gira de novo semana que vem!';
+    cartFeedback.hidden = false;
+    atualizarTotais();
+    return;
+  }
+  if (def) {
+    cupom = { codigo, ...def };
     campo.value = codigo;
     campo.disabled = true;
     document.getElementById('cartAplicarCupom').textContent = 'Aplicado ✓';
@@ -293,7 +316,10 @@ function resetFrete() {
 }
 
 function descontoAtual() {
-  return cupom ? cartSubtotal() * cupom.pct / 100 : 0;
+  if (!cupom) return 0;
+  const sub = cartSubtotal();
+  if (cupom.pct) return sub * cupom.pct / 100;
+  return Math.min(cupom.valor || 0, sub);
 }
 
 function totalFinalNum() {
@@ -308,7 +334,8 @@ function atualizarTotais() {
 
   const desc = descontoAtual();
   if (desc > 0) {
-    document.getElementById('descLabel').textContent = `Cupom ${cupom.codigo} (−${cupom.pct}%)`;
+    document.getElementById('descLabel').textContent =
+      cupom.pct ? `Cupom ${cupom.codigo} (−${cupom.pct}%)` : `Cupom ${cupom.codigo}`;
     document.getElementById('descValor').textContent = '−' + money(desc);
   }
   linhaDesc.hidden = desc <= 0;
@@ -402,6 +429,13 @@ function renderCart() {
 
 function openCart() {
   renderCart();
+  if (!cupom) {
+    const rc = cupomRoletaValido();
+    if (rc) {
+      document.getElementById('cartCupom').value = rc.codigo;
+      aplicarCupom();
+    }
+  }
   cartFeedback.hidden = true;
   cartBackdrop.hidden = false;
   requestAnimationFrame(() => {
@@ -829,3 +863,68 @@ faqItems.forEach((item) => {
 
 /* ---- Ano no rodapé ---- */
 document.getElementById('year').textContent = new Date().getFullYear();
+
+
+/* ================================================================
+   Roleta da sorte — semanal, prêmio vale 3 dias
+   ================================================================ */
+(function roleta() {
+  const PREMIOS = [
+    { codigo: 'ROLETA10', rotulo: '10% OFF', peso: 25 },
+    { codigo: 'ROLETA10OFF', rotulo: 'R$ 10 OFF', peso: 25 },
+    { codigo: 'ROLETA5', rotulo: '5% OFF', peso: 35 },
+    { codigo: 'ROLETA20OFF', rotulo: 'R$ 20 OFF', peso: 15 },
+  ];
+  const backdrop = document.getElementById('roletaBackdrop');
+  if (!backdrop) return;
+
+  const prox = parseInt(localStorage.getItem('univ_roleta_prox') || '0', 10);
+  if (Date.now() < prox) return;
+
+  setTimeout(() => { backdrop.hidden = false; requestAnimationFrame(() => backdrop.classList.add('is-open')); }, 4500);
+
+  function fechar(diasAteVoltar) {
+    backdrop.classList.remove('is-open');
+    setTimeout(() => { backdrop.hidden = true; }, 300);
+    localStorage.setItem('univ_roleta_prox', String(Date.now() + diasAteVoltar * 864e5));
+  }
+
+  document.getElementById('roletaFechar').addEventListener('click', () => fechar(1));
+
+  let girou = false;
+  document.getElementById('roletaGirar').addEventListener('click', () => {
+    if (girou) return;
+    girou = true;
+    const total = PREMIOS.reduce((a, p) => a + p.peso, 0);
+    let sorte = Math.random() * total;
+    let idx = 0;
+    for (let i = 0; i < PREMIOS.length; i++) { sorte -= PREMIOS[i].peso; if (sorte <= 0) { idx = i; break; } }
+    const premio = PREMIOS[idx];
+
+    const disco = document.getElementById('roletaDisco');
+    const destino = 6 * 360 + (360 - (idx * 90 + 45));
+    disco.style.transition = 'transform 4.2s cubic-bezier(0.12, 0.6, 0.08, 1)';
+    disco.style.transform = `rotate(${destino}deg)`;
+    document.getElementById('roletaGirar').disabled = true;
+
+    setTimeout(() => {
+      const expira = Date.now() + 3 * 864e5;
+      localStorage.setItem('univ_roleta', JSON.stringify({ codigo: premio.codigo, expira }));
+      localStorage.setItem('univ_roleta_prox', String(Date.now() + 7 * 864e5));
+      document.getElementById('roletaParabens').textContent = `Você ganhou ${premio.rotulo}! 🎉`;
+      document.getElementById('roletaCodigo').textContent = premio.codigo;
+      const dt = new Date(expira);
+      document.getElementById('roletaValidade').textContent =
+        `Válido até ${String(dt.getDate()).padStart(2, '0')}/${String(dt.getMonth() + 1).padStart(2, '0')} — já deixamos aplicado no seu carrinho.`;
+      document.getElementById('roletaGirar').hidden = true;
+      document.getElementById('roletaPremio').hidden = false;
+    }, 4400);
+  });
+
+  document.getElementById('roletaUsar').addEventListener('click', () => {
+    fechar(7);
+    document.getElementById('cartCupom').value = '';
+    cupom = null;
+    openCart();
+  });
+})();
