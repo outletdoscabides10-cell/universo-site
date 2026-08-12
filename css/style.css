@@ -36,6 +36,7 @@
 }
 
 * { margin: 0; padding: 0; box-sizing: border-box; }
+[hidden] { display: none !important; }
 
 html { scroll-behavior: smooth; scroll-padding-top: 138px; }
 
@@ -1554,30 +1555,28 @@ button { font-family: inherit; }
   border: 10px solid var(--navy-900);
   box-shadow: 0 14px 34px rgba(13, 31, 60, 0.3), inset 0 0 0 4px rgba(255, 255, 255, 0.35);
   background: conic-gradient(
-    var(--navy-800) 0deg 90deg,
-    var(--gold-500) 90deg 180deg,
-    var(--blue-600) 180deg 270deg,
-    var(--green-600) 270deg 360deg
+    var(--navy-800) 0deg 89deg, #fff 89deg 91deg,
+    var(--gold-500) 91deg 179deg, #fff 179deg 181deg,
+    var(--navy-800) 181deg 269deg, #fff 269deg 271deg,
+    var(--gold-500) 271deg 359deg, #fff 359deg 360deg
   );
   position: relative;
 }
 .roleta-fatia {
   position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 92px;
+  width: 90px;
   text-align: center;
   font-size: 19px;
   font-weight: 800;
   line-height: 1.15;
-  color: #fff;
-  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35);
-  transform-origin: 0 0;
+  transform: translate(-50%, -50%);
 }
-.roleta-fatia.f1 { transform: rotate(45deg) translate(56px, -46px) rotate(-45deg); }
-.roleta-fatia.f2 { transform: rotate(135deg) translate(56px, -46px) rotate(-135deg); color: var(--navy-900); text-shadow: none; }
-.roleta-fatia.f3 { transform: rotate(225deg) translate(56px, -46px) rotate(-225deg); }
-.roleta-fatia.f4 { transform: rotate(315deg) translate(56px, -46px) rotate(-315deg); }
+.roleta-fatia.clara { color: #fff; text-shadow: 0 1px 3px rgba(0, 0, 0, 0.35); }
+.roleta-fatia.escura { color: var(--navy-900); }
+.roleta-fatia.f1 { left: 70%; top: 30%; }
+.roleta-fatia.f2 { left: 70%; top: 70%; }
+.roleta-fatia.f3 { left: 30%; top: 70%; }
+.roleta-fatia.f4 { left: 30%; top: 30%; }
 
 .roleta-ponteiro {
   position: absolute;
