@@ -1641,3 +1641,261 @@ button { font-family: inherit; }
 .cupom-chip span { font-size: 12px; color: var(--ink-soft); flex: 1; }
 .cupom-chip i { font-style: normal; font-size: 12px; font-weight: 700; color: var(--green-600); }
 .cupom-chip.is-on { border-style: solid; border-color: var(--green-600); background: var(--green-050); }
+
+
+/* ================================================================
+   REFORMA "FARFETCH" — minimalismo de luxo nas cores da casa
+   (bloco de sobreposição: vence pela ordem da cascata)
+   ================================================================ */
+
+/* geometria: cantos retos e discretos */
+.btn { border-radius: 4px; }
+.chip { border-radius: 3px; font-size: 12px; letter-spacing: 0.06em; text-transform: uppercase; }
+.search input { border-radius: 4px; }
+.eyebrow { background: none; padding: 0; border-radius: 0; color: var(--ink-soft); letter-spacing: 0.16em; }
+.eyebrow-gold { background: none; color: var(--gold-600); }
+
+/* barra de categorias: tipografia de maison */
+.catbar-inner { gap: 34px; height: 52px; }
+.catbar-inner > a, .catbar .nav-drop-btn {
+  font-size: 11.5px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+.marquee-track span { font-size: 11px; letter-spacing: 0.16em; }
+
+/* vitrine: produto no palco, sem moldura */
+.prod-grid { gap: 40px 18px; }
+.prod-card,
+.prod-card:hover {
+  background: transparent;
+  border: none;
+  box-shadow: none;
+  border-radius: 0;
+  overflow: visible;
+  transform: none;
+}
+.prod-photo {
+  height: 300px;
+  padding: 12px;
+  background: #fff;
+  border: 1px solid var(--line);
+  cursor: pointer;
+  position: relative;
+}
+.prod-photo img { transition: opacity 300ms ease; }
+.prod-hover {
+  position: absolute;
+  inset: 12px;
+  width: calc(100% - 24px);
+  height: calc(100% - 24px);
+  object-fit: contain;
+  opacity: 0;
+}
+@media (hover: hover) and (pointer: fine) {
+  .prod-card:hover .prod-photo img:first-child { opacity: 0; }
+  .prod-card:hover .prod-hover { opacity: 1; }
+  .prod-card:hover .prod-photo { border-color: var(--navy-800); }
+}
+.prod-info { padding: 14px 2px 0; }
+.prod-kit { color: #97a1b3; font-size: 10.5px; letter-spacing: 0.14em; }
+.prod-info h3 {
+  font-weight: 500;
+  font-size: 14.5px;
+  line-height: 1.4;
+  min-height: 40px;
+  cursor: pointer;
+  margin-bottom: 8px;
+}
+.prod-price { display: flex; align-items: baseline; gap: 6px; margin-bottom: 12px; }
+.prod-price strong { font-size: 15.5px; font-weight: 700; color: var(--navy-900); letter-spacing: -0.01em; }
+.prod-price span { font-size: 12px; color: var(--ink-soft); }
+.prod-add {
+  width: 100%;
+  font: 600 12px/1 var(--font);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy-900);
+  background: #fff;
+  border: 1px solid var(--navy-800);
+  border-radius: 3px;
+  padding: 13px 0;
+  cursor: pointer;
+  transition: background-color 180ms ease, color 180ms ease, transform 140ms var(--ease-out);
+}
+.prod-add:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  .prod-add:hover { background: var(--navy-800); color: #fff; }
+}
+
+/* ================================================================
+   Visualização de produto (pv)
+   ================================================================ */
+.pv-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  background: rgba(13, 31, 60, 0.5);
+  display: grid;
+  place-items: center;
+  padding: 24px;
+  opacity: 0;
+  transition: opacity 250ms ease;
+}
+.pv-backdrop.is-open { opacity: 1; }
+
+.pv {
+  position: relative;
+  width: min(1060px, 100%);
+  max-height: 90vh;
+  background: #fff;
+  border-radius: 6px;
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  overflow: hidden;
+  transform: translateY(12px);
+  transition: transform 300ms var(--ease-out);
+}
+.pv-backdrop.is-open .pv { transform: translateY(0); }
+
+.pv-fechar {
+  position: absolute;
+  top: 16px;
+  right: 18px;
+  z-index: 2;
+  width: 38px;
+  height: 38px;
+  border: none;
+  border-radius: 50%;
+  background: rgba(13, 31, 60, 0.06);
+  color: var(--navy-900);
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.pv-galeria {
+  background: #fff;
+  border-right: 1px solid var(--line);
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.pv-palco {
+  flex: 1;
+  display: grid;
+  place-items: center;
+  padding: 34px;
+  min-height: 0;
+}
+.pv-palco img { max-height: 480px; max-width: 100%; object-fit: contain; }
+.pv-thumbs { display: flex; gap: 10px; padding: 0 24px 22px; }
+.pv-thumb {
+  width: 64px;
+  height: 64px;
+  padding: 4px;
+  background: #fff;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+  cursor: pointer;
+}
+.pv-thumb img { width: 100%; height: 100%; object-fit: contain; }
+.pv-thumb.is-on { border-color: var(--navy-900); }
+
+.pv-info { padding: 46px 42px 36px; overflow-y: auto; }
+.pv-cat {
+  display: block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold-600);
+  margin-bottom: 10px;
+}
+.pv-info h2 {
+  font-size: 23px;
+  font-weight: 600;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  color: var(--navy-900);
+  margin-bottom: 14px;
+  padding-right: 30px;
+}
+.pv-preco { display: flex; align-items: baseline; gap: 8px; }
+.pv-preco strong { font-size: 24px; font-weight: 800; color: var(--navy-900); }
+.pv-preco span { font-size: 13px; color: var(--ink-soft); }
+.pv-kit { font-size: 13px; color: var(--ink-soft); margin: 6px 0 22px; }
+
+.pv-acoes { display: flex; gap: 12px; margin-bottom: 14px; }
+.pv-qtd {
+  display: flex;
+  align-items: center;
+  border: 1px solid var(--line);
+  border-radius: 3px;
+}
+.pv-qtd button {
+  width: 42px;
+  height: 48px;
+  border: none;
+  background: none;
+  font-size: 18px;
+  color: var(--navy-900);
+  cursor: pointer;
+}
+.pv-qtd span { min-width: 34px; text-align: center; font-weight: 700; font-size: 15px; }
+.pv-add {
+  flex: 1;
+  font: 600 13px/1 var(--font);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #fff;
+  background: var(--navy-800);
+  border: none;
+  border-radius: 3px;
+  cursor: pointer;
+  transition: background-color 180ms ease, transform 140ms var(--ease-out);
+}
+.pv-add:active { transform: scale(0.98); }
+@media (hover: hover) and (pointer: fine) {
+  .pv-add:hover { background: var(--navy-700); }
+}
+.pv-whats {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--ink-soft);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  margin-bottom: 26px;
+}
+@media (hover: hover) and (pointer: fine) {
+  .pv-whats:hover { color: var(--wa); }
+}
+.pv-desc { border-top: 1px solid var(--line); padding-top: 20px; }
+.pv-desc h4 {
+  font-size: 11.5px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--navy-900);
+  margin-bottom: 10px;
+}
+.pv-desc p { font-size: 14px; color: var(--ink-soft); white-space: pre-line; line-height: 1.7; }
+
+@media (max-width: 860px) {
+  .pv-backdrop { padding: 0; }
+  .pv {
+    grid-template-columns: 1fr;
+    width: 100%;
+    height: 100dvh;
+    max-height: none;
+    border-radius: 0;
+    overflow-y: auto;
+    display: block;
+  }
+  .pv-galeria { border-right: none; border-bottom: 1px solid var(--line); }
+  .pv-palco { padding: 40px 24px 16px; }
+  .pv-palco img { max-height: 42vh; }
+  .pv-info { padding: 26px 22px 40px; overflow: visible; }
+  .pv-acoes { position: sticky; bottom: 0; background: #fff; padding: 10px 0; }
+}

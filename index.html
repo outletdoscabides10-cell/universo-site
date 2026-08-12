@@ -474,6 +474,37 @@
     </div>
   </footer>
 
+
+  <!-- ============ VISUALIZACAO DE PRODUTO ============ -->
+  <div class="pv-backdrop" id="pvBackdrop" hidden>
+    <div class="pv" role="dialog" aria-label="Detalhes do produto">
+      <button class="pv-fechar" id="pvFechar" aria-label="Fechar">✕</button>
+      <div class="pv-galeria">
+        <div class="pv-palco"><img id="pvImg" alt=""></div>
+        <div class="pv-thumbs" id="pvThumbs"></div>
+      </div>
+      <div class="pv-info">
+        <span class="pv-cat" id="pvCat"></span>
+        <h2 id="pvNome"></h2>
+        <div class="pv-preco"><strong id="pvPreco"></strong><span>/ unidade</span></div>
+        <p class="pv-kit" id="pvKit"></p>
+        <div class="pv-acoes">
+          <div class="pv-qtd">
+            <button id="pvMenos" aria-label="Diminuir">−</button>
+            <span id="pvQtd">1</span>
+            <button id="pvMais" aria-label="Aumentar">+</button>
+          </div>
+          <button class="pv-add" id="pvAdd">Adicionar à sacola</button>
+        </div>
+        <a class="pv-whats" id="pvWhats" target="_blank" rel="noopener">Prefere fechar pelo WhatsApp? Fala com a gente →</a>
+        <div class="pv-desc" id="pvDescWrap">
+          <h4>Descrição</h4>
+          <p id="pvDesc"></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- ============ CARRINHO ============ -->
   <div class="cart-backdrop" id="cartBackdrop" hidden></div>
   <aside class="cart" id="cartDrawer" aria-label="Seu pedido" aria-hidden="true">

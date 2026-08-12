@@ -93,17 +93,18 @@ function filtered() {
 }
 
 function cardHTML(p) {
-  const kit = p.kit ? p.kit : CAT_LABEL[p.cats[0]] || '';
   const enter = reduceMotion ? '' : ' is-entering';
+  const hover = (p.fotos || 1) > 1
+    ? `<img class="prod-hover" src="assets/products/${p.slug}-2.webp" alt="" loading="lazy">` : '';
   return `<article class="prod-card${enter}" id="p-${p.slug}" data-cat="${p.cats.join(' ')}">
-    <div class="prod-photo"><img src="assets/products/${p.slug}.webp" alt="${esc(p.nome)}" loading="lazy"></div>
+    <div class="prod-photo" data-view="${p.slug}">
+      <img src="assets/products/${p.slug}.webp" alt="${esc(p.nome)}" loading="lazy">${hover}
+    </div>
     <div class="prod-info">
-      <span class="prod-kit">${esc(kit)}</span>
-      <h3>${esc(p.nome)}</h3>
-      <div class="prod-buy">
-        <div class="prod-price"><span>por unidade</span><strong>R$ ${p.preco_unit}</strong></div>
-        <button class="btn btn-wa btn-sm" data-add="${p.slug}">+ Adicionar</button>
-      </div>
+      <span class="prod-kit">${esc(CAT_LABEL[p.cats[0]] || '')}</span>
+      <h3 data-view="${p.slug}">${esc(p.nome)}</h3>
+      <div class="prod-price"><strong>R$ ${p.preco_unit}</strong><span>/ unidade</span></div>
+      <button class="prod-add" data-add="${p.slug}">Adicionar à sacola</button>
     </div>
   </article>`;
 }
@@ -210,18 +211,7 @@ document.querySelectorAll('.js-drop-products').forEach((el) => { el.innerHTML = 
 
 /* garante que o card do produto escolhido está renderizado, rola e destaca */
 function showProduct(slug) {
-  clearSearch();
-  mainFilter = 'todos';
-  subFilter = 'todos';
-  syncChips();
-  const idx = window.PRODUTOS.findIndex((p) => p.slug === slug);
-  if (idx >= visibleCount) visibleCount = Math.ceil((idx + 1) / PAGE) * PAGE;
-  renderGrid();
-  const card = document.getElementById('p-' + slug);
-  if (!card) return;
-  card.classList.remove('is-flash');
-  void card.offsetWidth;
-  card.classList.add('is-flash');
+  abrirProduto(slug);
 }
 
 document.querySelectorAll('[data-goto]').forEach((a) => {
@@ -516,13 +506,91 @@ document.getElementById('cartCep').addEventListener('keydown', (e) => {
 });
 cartBackdrop.addEventListener('click', closeCart);
 document.addEventListener('keydown', (e) => {
-  if (e.key === 'Escape') closeCart();
+  if (e.key === 'Escape') { closeCart(); fecharProduto(); }
 });
 
 /* botões "Adicionar" (cards renderizados dinamicamente → delegação) */
 grid.addEventListener('click', (e) => {
   const btn = e.target.closest('[data-add]');
-  if (btn) addToCart(btn.dataset.add);
+  if (btn) { addToCart(btn.dataset.add); return; }
+  const ver = e.target.closest('[data-view]');
+  if (ver) abrirProduto(ver.dataset.view);
+});
+
+/* ================================================================
+   Visualização de produto
+   ================================================================ */
+let pvSlug = null;
+let pvQuantidade = 1;
+
+function abrirProduto(slug) {
+  const p = prodBySlug(slug);
+  if (!p) return;
+  pvSlug = slug;
+  pvQuantidade = 1;
+  document.getElementById('pvQtd').textContent = '1';
+  document.getElementById('pvCat').textContent = CAT_LABEL[p.cats[0]] || '';
+  document.getElementById('pvNome').textContent = p.nome;
+  document.getElementById('pvPreco').textContent = 'R$ ' + p.preco_unit;
+  document.getElementById('pvKit').textContent = p.unidades > 1
+    ? `Vendido por unidade — levando ${p.unidades} ou mais, rende: ${p.kit.toLowerCase()} por R$ ${p.preco}`
+    : 'Vendido por unidade';
+  document.getElementById('pvWhats').href = buyHref('o produto ' + p.nome);
+
+  const n = p.fotos || 1;
+  const srcs = Array.from({ length: n }, (_, i) => `assets/products/${slug}${i ? '-' + (i + 1) : ''}.webp`);
+  document.getElementById('pvImg').src = srcs[0];
+  document.getElementById('pvThumbs').innerHTML = n > 1
+    ? srcs.map((s, i) => `<button class="pv-thumb${i === 0 ? ' is-on' : ''}" data-src="${s}"><img src="${s}" alt=""></button>`).join('')
+    : '';
+  document.getElementById('pvThumbs').querySelectorAll('.pv-thumb').forEach((t) =>
+    t.addEventListener('click', () => {
+      document.getElementById('pvImg').src = t.dataset.src;
+      document.querySelectorAll('.pv-thumb').forEach((x) => x.classList.toggle('is-on', x === t));
+    })
+  );
+
+  const wrap = document.getElementById('pvDescWrap');
+  if (p.desc) {
+    document.getElementById('pvDesc').textContent = p.desc;
+    wrap.hidden = false;
+  } else {
+    wrap.hidden = true;
+  }
+
+  const bd = document.getElementById('pvBackdrop');
+  bd.hidden = false;
+  requestAnimationFrame(() => bd.classList.add('is-open'));
+  document.body.style.overflow = 'hidden';
+}
+
+function fecharProduto() {
+  const bd = document.getElementById('pvBackdrop');
+  if (!bd || bd.hidden) return;
+  bd.classList.remove('is-open');
+  setTimeout(() => { bd.hidden = true; }, 250);
+  document.body.style.overflow = '';
+}
+
+document.getElementById('pvFechar').addEventListener('click', fecharProduto);
+document.getElementById('pvBackdrop').addEventListener('click', (e) => {
+  if (e.target === document.getElementById('pvBackdrop')) fecharProduto();
+});
+document.getElementById('pvMais').addEventListener('click', () => {
+  pvQuantidade++;
+  document.getElementById('pvQtd').textContent = pvQuantidade;
+});
+document.getElementById('pvMenos').addEventListener('click', () => {
+  if (pvQuantidade > 1) pvQuantidade--;
+  document.getElementById('pvQtd').textContent = pvQuantidade;
+});
+document.getElementById('pvAdd').addEventListener('click', () => {
+  if (!pvSlug) return;
+  cart[pvSlug] = (cart[pvSlug] || 0) + pvQuantidade;
+  saveCart();
+  renderCart();
+  fecharProduto();
+  openCart();
 });
 
 /* +/−/remover dentro do carrinho */
