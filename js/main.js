@@ -101,7 +101,7 @@ function cardHTML(p) {
       <span class="prod-kit">${esc(kit)}</span>
       <h3>${esc(p.nome)}</h3>
       <div class="prod-buy">
-        <div class="prod-price"><span>a partir de</span><strong>R$ ${p.preco}</strong></div>
+        <div class="prod-price"><span>por unidade</span><strong>R$ ${p.preco_unit}</strong></div>
         <button class="btn btn-wa btn-sm" data-add="${p.slug}">+ Adicionar</button>
       </div>
     </div>
@@ -201,7 +201,7 @@ const dropHTML =
     const nome = p.nome.length > 30 ? p.nome.slice(0, 29).trim() + '…' : p.nome;
     return `<a href="#p-${p.slug}" data-goto role="menuitem">
       <img src="assets/products/${p.slug}.webp" alt="" loading="lazy">
-      <span class="dp-name">${esc(nome)}<b>R$ ${p.preco}</b></span>
+      <span class="dp-name">${esc(nome)}<b>R$ ${p.preco_unit} /un.</b></span>
     </a>`;
   }).join('') +
   `<a href="#produtos" data-filter-jump="todos" role="menuitem" class="dropdown-all">Ver catálogo completo (${window.PRODUTOS.length}) →</a>`;
@@ -256,12 +256,34 @@ function cartCount() {
 function cartSubtotal() {
   return Object.entries(cart).reduce((sum, [slug, qtd]) => {
     const p = prodBySlug(slug);
-    return p ? sum + precoNum(p.preco) * qtd : sum;
+    return p ? sum + precoNum(p.preco_unit) * qtd : sum;
   }, 0);
 }
 
-/* ---- Frete ---- */
+/* ---- Frete e cupom ---- */
 let freteSel = null;
+let cupom = null;
+
+const CUPONS = { PRIMEIRA10: 10 }; // código: % de desconto
+
+function aplicarCupom() {
+  const campo = document.getElementById('cartCupom');
+  const codigo = campo.value.trim().toUpperCase();
+  if (!codigo) return;
+  if (CUPONS[codigo]) {
+    cupom = { codigo, pct: CUPONS[codigo] };
+    campo.value = codigo;
+    campo.disabled = true;
+    document.getElementById('cartAplicarCupom').textContent = 'Aplicado ✓';
+    document.getElementById('cartAplicarCupom').disabled = true;
+    cartFeedback.hidden = true;
+  } else {
+    cupom = null;
+    cartFeedback.textContent = 'Esse cupom não existe ou expirou. Confere se digitou certinho?';
+    cartFeedback.hidden = false;
+  }
+  atualizarTotais();
+}
 
 function resetFrete() {
   freteSel = null;
@@ -270,21 +292,37 @@ function resetFrete() {
   atualizarTotais();
 }
 
+function descontoAtual() {
+  return cupom ? cartSubtotal() * cupom.pct / 100 : 0;
+}
+
+function totalFinalNum() {
+  return cartSubtotal() - descontoAtual() + (freteSel ? freteSel.valor : 0);
+}
+
 function atualizarTotais() {
   const linhaFrete = document.getElementById('linhaFrete');
   const linhaTotal = document.getElementById('linhaTotal');
+  const linhaDesc = document.getElementById('linhaDesconto');
   if (!linhaFrete) return;
+
+  const desc = descontoAtual();
+  if (desc > 0) {
+    document.getElementById('descLabel').textContent = `Cupom ${cupom.codigo} (−${cupom.pct}%)`;
+    document.getElementById('descValor').textContent = '−' + money(desc);
+  }
+  linhaDesc.hidden = desc <= 0;
+
   if (freteSel) {
     document.getElementById('freteLabel').textContent = `Frete (${freteSel.nome})`;
     document.getElementById('freteValor').textContent = money(freteSel.valor);
-    document.getElementById('totalFinal').textContent = money(cartSubtotal() + freteSel.valor);
-    linhaFrete.hidden = false;
-    linhaTotal.hidden = false;
     document.getElementById('cartNote').textContent = 'Frete estimado — se houver diferença, confirmamos antes de enviar.';
-  } else {
-    linhaFrete.hidden = true;
-    linhaTotal.hidden = true;
   }
+  linhaFrete.hidden = !freteSel;
+
+  const mostraTotal = desc > 0 || freteSel;
+  if (mostraTotal) document.getElementById('totalFinal').textContent = money(totalFinalNum());
+  linhaTotal.hidden = !mostraTotal;
 }
 
 async function calcularFrete() {
@@ -298,7 +336,7 @@ async function calcularFrete() {
     .filter(([slug]) => prodBySlug(slug))
     .map(([slug, qtd]) => {
       const p = prodBySlug(slug);
-      return { slug, nome: p.nome, preco: p.preco, qtd, cat: p.cats[0] };
+      return { slug, nome: p.nome, preco: p.preco_unit, qtd, cat: p.cats[0] };
     });
   box.innerHTML = '<p class="frete-erro">Calculando...</p>';
   try {
@@ -342,7 +380,7 @@ function renderCart() {
       <img src="assets/products/${slug}.webp" alt="" loading="lazy">
       <div class="cart-item-info">
         <span class="cart-item-nome">${esc(p.nome)}</span>
-        <span class="cart-item-preco">${money(precoNum(p.preco))}</span>
+        <span class="cart-item-preco">${money(precoNum(p.preco_unit))} <small>/unid.</small></span>
         <div class="cart-qty">
           <button data-menos="${slug}" aria-label="Diminuir">−</button>
           <span>${qtd}</span>
@@ -393,6 +431,10 @@ function addToCart(slug) {
 document.getElementById('cartOpen').addEventListener('click', openCart);
 document.getElementById('cartClose').addEventListener('click', closeCart);
 document.getElementById('cartCalcFrete').addEventListener('click', calcularFrete);
+document.getElementById('cartAplicarCupom').addEventListener('click', aplicarCupom);
+document.getElementById('cartCupom').addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') { e.preventDefault(); aplicarCupom(); }
+});
 document.getElementById('cartCep').addEventListener('keydown', (e) => {
   if (e.key === 'Enter') { e.preventDefault(); calcularFrete(); }
 });
@@ -437,11 +479,10 @@ function dadosDoCarrinho() {
     .filter(([slug]) => prodBySlug(slug))
     .map(([slug, qtd]) => {
       const p = prodBySlug(slug);
-      return { slug, nome: p.nome, preco: p.preco, qtd };
+      return { slug, nome: p.nome, preco: p.preco_unit, qtd };
     });
   if (!itens.length) return null;
-  const totalNum = cartSubtotal() + (freteSel ? freteSel.valor : 0);
-  return { nome, fone, itens, frete: freteSel, total: money(totalNum) };
+  return { nome, fone, itens, frete: freteSel, cupom, desconto: descontoAtual(), total: money(totalFinalNum()) };
 }
 
 /* grava o pedido e devolve o id (null se falhar).
@@ -466,7 +507,7 @@ async function registrarPedido(d) {
         'Content-Type': 'application/json',
         Prefer: 'return=minimal',
       },
-      body: JSON.stringify({ id, nome: d.nome, telefone: d.fone, itens: d.itens, frete: d.frete, total: d.total }),
+      body: JSON.stringify({ id, nome: d.nome, telefone: d.fone, itens: d.itens, frete: d.frete, cupom: d.cupom ? d.cupom.codigo : null, total: d.total }),
     });
     return r.ok ? id : null;
   } catch (e) {
@@ -499,7 +540,7 @@ document.getElementById('cartPayOnline').addEventListener('click', async () => {
     const r = await fetch(`${BACKEND_SITE}/checkout`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ pedido_id: pedidoId, itens: d.itens, frete: d.frete }),
+      body: JSON.stringify({ pedido_id: pedidoId, itens: d.itens, frete: d.frete, cupom: d.cupom ? d.cupom.codigo : null }),
     });
     const resp = await r.json();
     if (resp.ok && resp.init_point) {

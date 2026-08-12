@@ -468,6 +468,31 @@ button { font-family: inherit; }
 .banner-slide.is-active .banner-copy > *:nth-child(3) { transition-delay: 220ms; }
 .banner-slide.is-active .banner-copy > *:nth-child(4) { transition-delay: 300ms; }
 
+/* foto do banner: círculo branco com a foto integrada (multiply) */
+.banner-photo {
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.22);
+  width: min(400px, 88%);
+  aspect-ratio: 1;
+  display: grid;
+  place-items: center;
+  padding: 44px;
+  overflow: hidden;
+}
+.banner-photo img {
+  max-height: 100%;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .banner-photo { animation: fotoFlutua 7s ease-in-out infinite; }
+  @keyframes fotoFlutua {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-12px); }
+  }
+}
+
 /* visual: blob orgânico + foto + adesivos + brilhos */
 .banner-visual {
   position: relative;
@@ -603,6 +628,31 @@ button { font-family: inherit; }
   transition: width 250ms var(--ease-out), background-color 250ms ease;
 }
 .banner-dot.is-active { width: 26px; background: var(--gold-500); }
+
+/* pílula do cupom (banner) */
+.cupom-pill {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 12px;
+  border: 2px dashed var(--gold-600);
+  border-radius: 14px;
+  padding: 12px 22px;
+  margin-bottom: 26px;
+  background: rgba(255, 255, 255, 0.6);
+}
+.cupom-pill span {
+  font-size: 12.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--gold-600);
+}
+.cupom-pill strong {
+  font-size: 26px;
+  font-weight: 800;
+  letter-spacing: 0.06em;
+  color: var(--navy-900);
+}
 
 /* ---------------- Marquee ---------------- */
 .marquee { background: var(--navy-900); overflow: hidden; padding-block: 13px; }
@@ -1202,6 +1252,11 @@ button { font-family: inherit; }
   gap: 10px;
   background: var(--bg-soft);
 }
+.cart-cupom { display: flex; gap: 8px; }
+.cart-cupom input { flex: 1; min-width: 0; text-transform: uppercase; }
+.cart-cupom input::placeholder { text-transform: none; }
+.cart-total-desc strong { color: var(--green-600) !important; }
+
 .cart-cep { display: flex; flex-direction: column; gap: 8px; }
 .cart-cep-row { display: flex; gap: 8px; }
 .cart-cep-row input { flex: 1; min-width: 0; }
