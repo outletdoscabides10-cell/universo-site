@@ -1618,3 +1618,27 @@ button { font-family: inherit; }
 @media (prefers-reduced-motion: reduce) {
   .roleta-backdrop, .roleta-modal { transition: none; }
 }
+
+
+/* cupons disponíveis no carrinho (selecionáveis) */
+.cupons-disponiveis { display: flex; flex-direction: column; gap: 8px; }
+.cupons-titulo { font-size: 12px; font-weight: 700; color: var(--ink-soft); text-transform: uppercase; letter-spacing: 0.05em; }
+.cupom-chip {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  width: 100%;
+  text-align: left;
+  background: #fff;
+  border: 2px dashed var(--gold-600);
+  border-radius: 12px;
+  padding: 10px 14px;
+  cursor: pointer;
+  font-family: inherit;
+  transition: border-color 150ms ease, background-color 150ms ease, transform 140ms var(--ease-out);
+}
+.cupom-chip:active { transform: scale(0.98); }
+.cupom-chip b { font-size: 14px; font-weight: 800; color: var(--navy-900); letter-spacing: 0.04em; }
+.cupom-chip span { font-size: 12px; color: var(--ink-soft); flex: 1; }
+.cupom-chip i { font-style: normal; font-size: 12px; font-weight: 700; color: var(--green-600); }
+.cupom-chip.is-on { border-style: solid; border-color: var(--green-600); background: var(--green-050); }

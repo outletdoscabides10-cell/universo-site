@@ -272,6 +272,54 @@ const CUPONS = {
   ROLETA20OFF: { valor: 20, roleta: true },
 };
 
+const CUPOM_ROTULO = {
+  PRIMEIRA10: '10% OFF · primeira compra',
+  ROLETA10: '10% OFF · prêmio da roleta',
+  ROLETA5: '5% OFF · prêmio da roleta',
+  ROLETA10OFF: 'R$ 10 OFF · prêmio da roleta',
+  ROLETA20OFF: 'R$ 20 OFF · prêmio da roleta',
+};
+
+function renderCuponsDisponiveis() {
+  const box = document.getElementById('cuponsDisponiveis');
+  if (!box) return;
+  const lista = [{ codigo: 'PRIMEIRA10' }];
+  const rc = cupomRoletaValido();
+  if (rc) {
+    const dt = new Date(rc.expira);
+    lista.push({ codigo: rc.codigo, extra: ` · até ${String(dt.getDate()).padStart(2, '0')}/${String(dt.getMonth() + 1).padStart(2, '0')}` });
+  }
+  box.innerHTML = '<span class="cupons-titulo">Cupons disponíveis — toca pra usar:</span>' +
+    lista.map((c) => `
+      <button type="button" class="cupom-chip${cupom && cupom.codigo === c.codigo ? ' is-on' : ''}" data-cupom="${c.codigo}">
+        <b>${c.codigo}</b><span>${CUPOM_ROTULO[c.codigo] || ''}${c.extra || ''}</span>
+        ${cupom && cupom.codigo === c.codigo ? '<i>aplicado ✓</i>' : ''}
+      </button>`).join('');
+
+  box.querySelectorAll('[data-cupom]').forEach((btn) =>
+    btn.addEventListener('click', () => {
+      const codigo = btn.dataset.cupom;
+      const campo = document.getElementById('cartCupom');
+      const aplicar = document.getElementById('cartAplicarCupom');
+      if (cupom && cupom.codigo === codigo) {
+        cupom = null;                       // toca de novo = remove
+        campo.value = '';
+        campo.disabled = false;
+        aplicar.textContent = 'Aplicar';
+        aplicar.disabled = false;
+      } else {
+        campo.disabled = false;
+        aplicar.disabled = false;
+        aplicar.textContent = 'Aplicar';
+        campo.value = codigo;
+        aplicarCupom();
+      }
+      renderCuponsDisponiveis();
+      atualizarTotais();
+    })
+  );
+}
+
 function cupomRoletaValido() {
   try {
     const rc = JSON.parse(localStorage.getItem('univ_roleta') || 'null');
@@ -429,13 +477,7 @@ function renderCart() {
 
 function openCart() {
   renderCart();
-  if (!cupom) {
-    const rc = cupomRoletaValido();
-    if (rc) {
-      document.getElementById('cartCupom').value = rc.codigo;
-      aplicarCupom();
-    }
-  }
+  renderCuponsDisponiveis();
   cartFeedback.hidden = true;
   cartBackdrop.hidden = false;
   requestAnimationFrame(() => {
