@@ -666,7 +666,7 @@ function abrirProduto(slug) {
     ? p.galeria
     : Array.from({ length: p.fotos || 1 }, (_, i) => (i ? '-' + (i + 1) : ''));
   const srcs = sufixos.map((s) => `assets/products/${slug}${s}.webp`);
-  const ROTULO = { '-med': 'Medidas', '-det': 'Detalhe' };
+  const ROTULO = { '-med': 'Medidas', '-det': 'Detalhe', '-ombro': 'Ombro', '-base': 'Corpo' };
   pararApresentacao();
   const img = document.getElementById('pvImg');
   img.src = srcs[0];
