@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "universo-site-b",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5198"],
+      "port": 5198,
+      "cwd": "C:\\universo-site"
+    }
+  ]
+}
