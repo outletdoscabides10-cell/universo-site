@@ -151,8 +151,7 @@ button { font-family: inherit; }
   .catbar-inner > a:hover { color: var(--blue-600); }
 }
 .catbar-sep { flex: 1; }
-.catbar-drop .dropdown { left: -8px; }
-.catbar-cab-link { display: none !important; }
+.catbar-cab-link { display: inline !important; }
 
 /* sub-itens (materiais) no menu mobile de categorias */
 .drop-sub { padding-left: 26px !important; font-weight: 500 !important; }

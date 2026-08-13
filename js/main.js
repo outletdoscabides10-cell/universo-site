@@ -33,12 +33,7 @@ const precoNum = (s) => parseFloat(s.replace(/\./g, '').replace(',', '.'));
 const money = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
 const CAT_LABEL = {
-  veludo: 'Cabide · Veludo',
-  madeira: 'Cabide · Madeira',
-  plastico: 'Cabide · Plástico & Acrílico',
-  silhuetas: 'Cabide · Silhueta',
-  metal: 'Cabide · Metal & Emborrachado',
-  infantil: 'Cabide · Infantil',
+  cabides: 'Cabide',
   araras: 'Arara',
   bustos: 'Busto',
   manequins: 'Manequim',
@@ -54,12 +49,10 @@ const loadMoreBtn = document.getElementById('loadMore');
 const loadMoreCount = document.getElementById('loadMoreCount');
 const filterBar = document.getElementById('filterBar');
 
-/* nichos principais e materiais de cabide (sub-abas) */
+/* nichos principais */
 const NICHOS = ['todos', 'cabides', 'araras', 'bustos', 'manequins'];
-const CABIDE_CATS = ['veludo', 'madeira', 'plastico', 'silhuetas', 'metal', 'infantil'];
 
 let mainFilter = 'todos';
-let subFilter = 'todos';
 let visibleCount = PAGE;
 let searchQuery = '';
 
@@ -83,12 +76,6 @@ function filtered() {
     });
   }
   if (mainFilter === 'todos') return window.PRODUTOS;
-  if (mainFilter === 'cabides') {
-    return window.PRODUTOS.filter((p) =>
-      p.cats.some((c) => CABIDE_CATS.includes(c)) &&
-      (subFilter === 'todos' || p.cats.includes(subFilter))
-    );
-  }
   return window.PRODUTOS.filter((p) => p.cats.includes(mainFilter));
 }
 
@@ -123,16 +110,10 @@ loadMoreBtn.addEventListener('click', () => {
   renderGrid();
 });
 
-const filterSubBar = document.getElementById('filterSub');
-
 function syncChips() {
   filterBar.querySelectorAll('.chip').forEach((c) =>
     c.classList.toggle('is-active', !searchQuery && c.dataset.main === mainFilter)
   );
-  filterSubBar.querySelectorAll('.chip').forEach((c) =>
-    c.classList.toggle('is-active', !searchQuery && c.dataset.sub === subFilter)
-  );
-  filterSubBar.hidden = mainFilter !== 'cabides' || !!searchQuery;
 }
 
 function clearSearch() {
@@ -142,16 +123,6 @@ function clearSearch() {
 
 function setMain(m) {
   mainFilter = m;
-  subFilter = 'todos';
-  clearSearch();
-  visibleCount = PAGE;
-  syncChips();
-  renderGrid();
-}
-
-function setSub(s) {
-  mainFilter = 'cabides';
-  subFilter = s;
   clearSearch();
   visibleCount = PAGE;
   syncChips();
@@ -161,11 +132,6 @@ function setSub(s) {
 filterBar.addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
   if (chip) setMain(chip.dataset.main);
-});
-
-filterSubBar.addEventListener('click', (e) => {
-  const chip = e.target.closest('.chip');
-  if (chip) setSub(chip.dataset.sub);
 });
 
 /* ---- Busca no header ---- */
@@ -188,7 +154,7 @@ renderGrid();
 /* ================================================================
    Dropdown "Produtos" no menu (12 destaques do catálogo)
    ================================================================ */
-const QUOTAS = { veludo: 2, madeira: 2, plastico: 1, silhuetas: 1, metal: 1, infantil: 1, araras: 2, bustos: 1, manequins: 1 };
+const QUOTAS = { cabides: 6, araras: 3, bustos: 1, manequins: 2 };
 const destaques = [];
 const usados = new Set();
 Object.entries(QUOTAS).forEach(([cat, n]) => {
@@ -853,13 +819,11 @@ document.addEventListener('click', (e) => {
   });
 });
 
-/* cards de categoria e itens do menu levam direto pro filtro certo:
-   nichos ativam a aba principal; materiais ativam Cabides + sub-aba */
+/* cards de categoria e itens do menu levam direto pra aba certa */
 document.querySelectorAll('[data-filter-jump]').forEach((cardLink) => {
   cardLink.addEventListener('click', () => {
     const target = cardLink.dataset.filterJump;
-    if (NICHOS.includes(target)) setMain(target);
-    else setSub(target);
+    setMain(NICHOS.includes(target) ? target : 'todos');
   });
 });
 
