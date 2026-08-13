@@ -181,8 +181,8 @@ button { font-family: inherit; }
 }
 
 .brand { display: inline-flex; align-items: center; gap: 10px; }
-.brand-logo { height: 58px; width: auto; mix-blend-mode: multiply; }
-.footer .brand-logo { height: 84px; }
+.brand-logo { height: 72px; width: auto; }
+.footer .brand-logo { height: 120px; }
 .brand-emblem { height: 46px; width: 46px; flex: none; }
 .brand-text { display: flex; flex-direction: column; line-height: 1.02; }
 .brand-text strong { font-size: 18px; font-weight: 800; letter-spacing: 0.03em; color: var(--navy-800); }
