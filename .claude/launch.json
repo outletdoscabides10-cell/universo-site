@@ -7,6 +7,13 @@
       "runtimeArgs": ["-m", "http.server", "5198"],
       "port": 5198,
       "cwd": "C:\\universo-site"
+    },
+    {
+      "name": "universo-site-c",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "5197"],
+      "port": 5197,
+      "cwd": "C:\\universo-site"
     }
   ]
 }
