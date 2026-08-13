@@ -37,6 +37,30 @@ const CAT_LABEL = {
   araras: 'Arara',
   bustos: 'Busto',
   manequins: 'Manequim',
+  madeira: 'Cabide · Madeira',
+  acrilico: 'Cabide · Acrílico',
+  plastico: 'Cabide · Plástico',
+  'plastico-preto': 'Cabide · Plástico Preto',
+  'plastico-prata': 'Cabide · Plástico Prata',
+  veludo: 'Cabide · Veludo',
+  silhuetas: 'Cabide · Silhueta',
+};
+
+/* sub-abas: linhas dentro de Cabides; cores dentro de Plástico */
+const SUBS = {
+  cabides: [
+    ['todos', 'Todos os cabides'],
+    ['madeira', 'Madeira'],
+    ['acrilico', 'Acrílico'],
+    ['plastico', 'Plástico'],
+    ['veludo', 'Veludo'],
+    ['silhuetas', 'Silhuetas'],
+  ],
+  plastico: [
+    ['todos', 'Todas as cores'],
+    ['plastico-preto', 'Preto'],
+    ['plastico-prata', 'Prata'],
+  ],
 };
 
 /* ================================================================
@@ -53,6 +77,8 @@ const filterBar = document.getElementById('filterBar');
 const NICHOS = ['todos', 'cabides', 'araras', 'bustos', 'manequins'];
 
 let mainFilter = 'todos';
+let subFilter = 'todos';
+let sub2Filter = 'todos';
 let visibleCount = PAGE;
 let searchQuery = '';
 
@@ -76,7 +102,8 @@ function filtered() {
     });
   }
   if (mainFilter === 'todos') return window.PRODUTOS;
-  return window.PRODUTOS.filter((p) => p.cats.includes(mainFilter));
+  const alvo = sub2Filter !== 'todos' ? sub2Filter : (subFilter !== 'todos' ? subFilter : mainFilter);
+  return window.PRODUTOS.filter((p) => p.cats.includes(alvo));
 }
 
 function cardHTML(p) {
@@ -88,10 +115,13 @@ function cardHTML(p) {
       <img src="assets/products/${p.slug}.webp" alt="${esc(p.nome)}" loading="lazy">${hover}
     </div>
     <div class="prod-info">
-      <span class="prod-kit">${esc(CAT_LABEL[p.cats[0]] || '')}</span>
+      <span class="prod-kit">${esc(CAT_LABEL[[...p.cats].reverse().find((c) => CAT_LABEL[c]) || p.cats[0]] || '')}</span>
       <h3 data-view="${p.slug}">${esc(p.nome)}</h3>
-      <div class="prod-price"><strong>R$ ${p.preco_unit}</strong><span>/ unidade</span></div>
-      <button class="prod-add" data-add="${p.slug}">Adicionar à sacola</button>
+      ${p.preco_unit
+        ? `<div class="prod-price"><strong>R$ ${p.preco_unit}</strong><span>/ unidade</span></div>
+      <button class="prod-add" data-add="${p.slug}">Adicionar à sacola</button>`
+        : `<div class="prod-price prod-price-consulte"><strong>Consulte o preço</strong></div>
+      <button class="prod-add" data-buy="o produto ${esc(p.nome)} (SKU ${esc(p.sku || '')})">Pedir pelo WhatsApp</button>`}
     </div>
   </article>`;
 }
@@ -110,10 +140,25 @@ loadMoreBtn.addEventListener('click', () => {
   renderGrid();
 });
 
+const filterSubBar = document.getElementById('filterSub');
+const filterSub2Bar = document.getElementById('filterSub2');
+
+function chipsHTML(subs, ativo) {
+  return subs.map(([val, rotulo]) =>
+    `<button class="chip chip-sm${val === ativo ? ' is-active' : ''}" data-sub="${val}">${rotulo}</button>`
+  ).join('');
+}
+
 function syncChips() {
   filterBar.querySelectorAll('.chip').forEach((c) =>
     c.classList.toggle('is-active', !searchQuery && c.dataset.main === mainFilter)
   );
+  const mostraSub = mainFilter === 'cabides' && !searchQuery;
+  filterSubBar.hidden = !mostraSub;
+  filterSubBar.innerHTML = mostraSub ? chipsHTML(SUBS.cabides, subFilter) : '';
+  const mostraSub2 = mostraSub && subFilter === 'plastico';
+  filterSub2Bar.hidden = !mostraSub2;
+  filterSub2Bar.innerHTML = mostraSub2 ? chipsHTML(SUBS.plastico, sub2Filter) : '';
 }
 
 function clearSearch() {
@@ -123,6 +168,26 @@ function clearSearch() {
 
 function setMain(m) {
   mainFilter = m;
+  subFilter = 'todos';
+  sub2Filter = 'todos';
+  clearSearch();
+  visibleCount = PAGE;
+  syncChips();
+  renderGrid();
+}
+
+function setSub(s) {
+  mainFilter = 'cabides';
+  subFilter = s;
+  sub2Filter = 'todos';
+  clearSearch();
+  visibleCount = PAGE;
+  syncChips();
+  renderGrid();
+}
+
+function setSub2(s) {
+  sub2Filter = s;
   clearSearch();
   visibleCount = PAGE;
   syncChips();
@@ -132,6 +197,16 @@ function setMain(m) {
 filterBar.addEventListener('click', (e) => {
   const chip = e.target.closest('.chip');
   if (chip) setMain(chip.dataset.main);
+});
+
+filterSubBar.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (chip) setSub(chip.dataset.sub);
+});
+
+filterSub2Bar.addEventListener('click', (e) => {
+  const chip = e.target.closest('.chip');
+  if (chip) setSub2(chip.dataset.sub);
 });
 
 /* ---- Busca no header ---- */
@@ -502,13 +577,19 @@ function abrirProduto(slug) {
   pvSlug = slug;
   pvQuantidade = 1;
   document.getElementById('pvQtd').textContent = '1';
-  document.getElementById('pvCat').textContent = CAT_LABEL[p.cats[0]] || '';
+  const catMaisEspecifica = [...p.cats].reverse().find((c) => CAT_LABEL[c]) || p.cats[0];
+  document.getElementById('pvCat').textContent =
+    (CAT_LABEL[catMaisEspecifica] || '') + (p.sku ? ' · SKU ' + p.sku : '');
   document.getElementById('pvNome').textContent = p.nome;
-  document.getElementById('pvPreco').textContent = 'R$ ' + p.preco_unit;
-  document.getElementById('pvKit').textContent = p.unidades > 1
-    ? `Vendido por unidade — levando ${p.unidades} ou mais, rende: ${p.kit.toLowerCase()} por R$ ${p.preco}`
-    : 'Vendido por unidade';
-  document.getElementById('pvWhats').href = buyHref('o produto ' + p.nome);
+  const temPreco = !!p.preco_unit;
+  document.getElementById('pvPreco').textContent = temPreco ? 'R$ ' + p.preco_unit : 'Consulte o preço';
+  document.getElementById('pvKit').textContent = !temPreco
+    ? 'Chama no WhatsApp que passamos o valor na hora'
+    : p.unidades > 1
+      ? `Vendido por unidade — levando ${p.unidades} ou mais, rende: ${p.kit.toLowerCase()} por R$ ${p.preco}`
+      : 'Vendido por unidade';
+  document.getElementById('pvAdd').hidden = !temPreco;
+  document.getElementById('pvWhats').href = buyHref('o produto ' + p.nome + (p.sku ? ' (SKU ' + p.sku + ')' : ''));
 
   const sufixos = (p.galeria && p.galeria.length)
     ? p.galeria
@@ -820,10 +901,13 @@ document.addEventListener('click', (e) => {
 });
 
 /* cards de categoria e itens do menu levam direto pra aba certa */
+const SUBS_CABIDES = SUBS.cabides.map(([v]) => v);
 document.querySelectorAll('[data-filter-jump]').forEach((cardLink) => {
   cardLink.addEventListener('click', () => {
     const target = cardLink.dataset.filterJump;
-    setMain(NICHOS.includes(target) ? target : 'todos');
+    if (NICHOS.includes(target)) setMain(target);
+    else if (SUBS_CABIDES.includes(target)) setSub(target);
+    else setMain('todos');
   });
 });
 
