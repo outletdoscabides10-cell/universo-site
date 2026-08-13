@@ -1,4 +1,4 @@
-/* Linha de araras profissionais — precos vindos do ERP (13/08); sem preco = nao aparece. */
+/* Linha de araras profissionais — precos vindos do ERP; sem preco = nao aparece. */
 window.PRODUTOS_ARARAS = [
  {
   "slug": "arara-desfile-square-2124-cromado",
