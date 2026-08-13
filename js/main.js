@@ -93,6 +93,42 @@ window.PRODUTOS.forEach((p) => {
 
 document.getElementById('prodCount').textContent = window.PRODUTOS.length;
 
+/* ================================================================
+   VARIAÇÕES DE COR — mesmo código de produto (prefixo numérico do SKU),
+   cores diferentes = UM produto com seletor de cor no modal.
+   ================================================================ */
+const GRUPOS = {};                 // base -> [produtos na ordem do catálogo]
+window.PRODUTOS.forEach((p) => {
+  const m = /^(\d+)/.exec(p.sku || '');
+  p._base = m ? m[1] : (p.sku || p.slug);
+  (GRUPOS[p._base] = GRUPOS[p._base] || []).push(p);
+});
+
+function grupoDe(p) { return GRUPOS[p._base] || [p]; }
+
+// rótulo da cor = o que sobra do nome depois do prefixo comum do grupo (ex: "Marfim")
+function corLabel(p) {
+  const grupo = grupoDe(p);
+  if (grupo.length < 2) return '';
+  const palavras = grupo.map((x) => (x.nome || '').split(' '));
+  let i = 0;
+  while (palavras[0][i] && palavras.every((w) => w[i] === palavras[0][i])) i++;
+  const resto = (p.nome || '').split(' ').slice(i).join(' ').trim();
+  return resto || (p.sku || '').replace(/^\d+/, '');
+}
+
+// nome "base" do grupo (sem a cor) pro card agrupado
+function nomeBase(p) {
+  const grupo = grupoDe(p);
+  if (grupo.length < 2) return p.nome;
+  const palavras = grupo.map((x) => (x.nome || '').split(' '));
+  let i = 0;
+  while (palavras[0][i] && palavras.every((w) => w[i] === palavras[0][i])) i++;
+  let base = palavras[0].slice(0, i).join(' ').trim();
+  base = base.replace(/\s+(de|da|do|com|e|em)$/i, '').trim();
+  return base || p.nome;
+}
+
 function filtered() {
   if (searchQuery) {
     const tokens = searchQuery.split(/\s+/);
@@ -108,15 +144,21 @@ function filtered() {
 
 function cardHTML(p) {
   const enter = reduceMotion ? '' : ' is-entering';
-  const hover = (p.fotos || 1) > 1
-    ? `<img class="prod-hover" src="assets/products/${p.slug}-2.webp" alt="" loading="lazy">` : '';
+  const grupo = grupoDe(p);
+  const nCores = grupo.length;
+  const hover = nCores > 1
+    ? `<img class="prod-hover" src="assets/products/${grupo[1].slug}.webp" alt="" loading="lazy">`
+    : ((p.fotos || 1) > 1
+      ? `<img class="prod-hover" src="assets/products/${p.slug}-2.webp" alt="" loading="lazy">` : '');
+  const titulo = nCores > 1 ? nomeBase(p) : p.nome;
   return `<article class="prod-card${enter}" id="p-${p.slug}" data-cat="${p.cats.join(' ')}">
     <div class="prod-photo" data-view="${p.slug}">
-      <img src="assets/products/${p.slug}.webp" alt="${esc(p.nome)}" loading="lazy">${hover}
+      <img src="assets/products/${p.slug}.webp" alt="${esc(titulo)}" loading="lazy">${hover}
+      ${nCores > 1 ? `<span class="prod-cores-badge">${nCores} cores</span>` : ''}
     </div>
     <div class="prod-info">
       <span class="prod-kit">${esc(CAT_LABEL[[...p.cats].reverse().find((c) => CAT_LABEL[c]) || p.cats[0]] || '')}</span>
-      <h3 data-view="${p.slug}">${esc(p.nome)}</h3>
+      <h3 data-view="${p.slug}">${esc(titulo)}</h3>
       ${p.preco_unit
         ? `<div class="prod-price"><strong>R$ ${p.preco_unit}</strong><span>/ unidade</span></div>
       <button class="prod-add" data-add="${p.slug}">Adicionar à sacola</button>`
@@ -126,8 +168,19 @@ function cardHTML(p) {
   </article>`;
 }
 
+// vitrine mostra UM card por produto (cores agrupadas); a busca ainda acha por cor
+// e o card representa a variação que casou com o filtro/busca.
+function dedupeGrupos(list) {
+  const vistos = new Set(); const out = [];
+  for (const p of list) {
+    if (vistos.has(p._base)) continue;
+    vistos.add(p._base); out.push(p);
+  }
+  return out;
+}
+
 function renderGrid() {
-  const list = filtered();
+  const list = dedupeGrupos(filtered());
   grid.innerHTML = list.slice(0, visibleCount).map(cardHTML).join('');
   prodEmpty.hidden = list.length > 0;
   const restante = list.length - visibleCount;
@@ -580,7 +633,25 @@ function abrirProduto(slug) {
   const catMaisEspecifica = [...p.cats].reverse().find((c) => CAT_LABEL[c]) || p.cats[0];
   document.getElementById('pvCat').textContent =
     (CAT_LABEL[catMaisEspecifica] || '') + (p.sku ? ' · SKU ' + p.sku : '');
-  document.getElementById('pvNome').textContent = p.nome;
+  const grupo = grupoDe(p);
+  document.getElementById('pvNome').textContent = grupo.length > 1 ? nomeBase(p) : p.nome;
+
+  // SELETOR DE COR: todas as variações do mesmo produto num lugar só
+  const coresWrap = document.getElementById('pvCores');
+  const coresChips = document.getElementById('pvCoresChips');
+  if (grupo.length > 1) {
+    coresChips.innerHTML = grupo.map((v) =>
+      `<button class="pv-cor${v.slug === slug ? ' is-on' : ''}" data-cor-slug="${v.slug}" title="${esc(corLabel(v))}">` +
+      `<img src="assets/products/${v.slug}.webp" alt="" loading="lazy"><span>${esc(corLabel(v))}</span></button>`
+    ).join('');
+    coresChips.querySelectorAll('.pv-cor').forEach((b) =>
+      b.addEventListener('click', () => { if (b.dataset.corSlug !== pvSlug) abrirProduto(b.dataset.corSlug); })
+    );
+    coresWrap.hidden = false;
+  } else {
+    coresWrap.hidden = true;
+    coresChips.innerHTML = '';
+  }
   const temPreco = !!p.preco_unit;
   document.getElementById('pvPreco').textContent = temPreco ? 'R$ ' + p.preco_unit : 'Consulte o preço';
   document.getElementById('pvKit').textContent = !temPreco
