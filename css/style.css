@@ -720,23 +720,23 @@ button { font-family: inherit; }
 @media (hover: hover) and (pointer: fine) {
   .cat-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-md); border-color: transparent; }
   .cat-card:hover .cat-cta { color: var(--blue-600); }
-  .cat-card:hover .cat-photo img { transform: scale(1.07) rotate(-2deg); }
+  .cat-card:hover .cat-photo img { transform: scale(1.06); }
 }
 .cat-card:active { transform: scale(0.985); }
 
 .cat-photo {
   display: grid;
   place-items: center;
-  background: linear-gradient(160deg, #f4f7fc, #e9eef7);
-  padding: 26px;
-  height: 210px;
+  background: linear-gradient(175deg, #ffffff 0%, #f6f8fc 78%, #eef2f9 100%);
+  padding: 18px;
+  height: 250px;
   overflow: hidden;
 }
 .cat-photo img {
   max-height: 100%;
   object-fit: contain;
   mix-blend-mode: multiply;
-  transition: transform 300ms var(--ease-out);
+  transition: transform 320ms var(--ease-out);
 }
 
 .cat-info { padding: 22px 26px 26px; }
