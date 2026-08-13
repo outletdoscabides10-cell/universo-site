@@ -1,5 +1,4 @@
-/* Linha de araras profissionais — cadastro gerado; precos entram quando o dono passar.
-   Produtos sem preco NAO aparecem no site (filtro abaixo). */
+/* Linha de araras profissionais — precos vindos do ERP (13/08); sem preco = nao aparece. */
 window.PRODUTOS_ARARAS = [
  {
   "slug": "arara-desfile-square-2124-cromado",
@@ -7,8 +6,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Square Cromada (Ref. 2124)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.449,90",
+  "preco_unit": "1.449,90",
   "cats": [
    "araras"
   ],
@@ -26,8 +25,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Square Dourada (Ref. 2124)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.499,90",
+  "preco_unit": "1.499,90",
   "cats": [
    "araras"
   ],
@@ -45,8 +44,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Square Rosé (Ref. 2124)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.499,90",
+  "preco_unit": "1.499,90",
   "cats": [
    "araras"
   ],
@@ -64,8 +63,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Square Cromada (Ref. 2126)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.549,90",
+  "preco_unit": "1.549,90",
   "cats": [
    "araras"
   ],
@@ -83,8 +82,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Square Dourada (Ref. 2126)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.599,90",
+  "preco_unit": "1.599,90",
   "cats": [
    "araras"
   ],
@@ -102,8 +101,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Square Rosé (Ref. 2126)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.599,90",
+  "preco_unit": "1.599,90",
   "cats": [
    "araras"
   ],
@@ -121,8 +120,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Royal Cromada (Ref. 2122)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.549,90",
+  "preco_unit": "1.549,90",
   "cats": [
    "araras"
   ],
@@ -140,8 +139,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Royal Dourada (Ref. 2122)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.599,90",
+  "preco_unit": "1.599,90",
   "cats": [
    "araras"
   ],
@@ -159,8 +158,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Royal Rosé (Ref. 2122)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.599,90",
+  "preco_unit": "1.599,90",
   "cats": [
    "araras"
   ],
@@ -178,8 +177,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Duplo Square Cromada (Ref. 2127)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.449,90",
+  "preco_unit": "1.449,90",
   "cats": [
    "araras"
   ],
@@ -197,8 +196,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Duplo Square Dourada (Ref. 2127)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.499,90",
+  "preco_unit": "1.499,90",
   "cats": [
    "araras"
   ],
@@ -216,8 +215,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Duplo Square Rosé (Ref. 2127)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.499,90",
+  "preco_unit": "1.499,90",
   "cats": [
    "araras"
   ],
@@ -235,8 +234,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Duplo Square Base Cromada (Ref. 2130)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.499,90",
+  "preco_unit": "1.499,90",
   "cats": [
    "araras"
   ],
@@ -254,8 +253,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Duplo Square Base Dourada (Ref. 2130)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.549,90",
+  "preco_unit": "1.549,90",
   "cats": [
    "araras"
   ],
@@ -273,8 +272,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Duplo Square Base Rosé (Ref. 2130)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "1.549,90",
+  "preco_unit": "1.549,90",
   "cats": [
    "araras"
   ],
@@ -292,8 +291,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Simples Dourada (Ref. 2050)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "616,00",
+  "preco_unit": "616,00",
   "cats": [
    "araras"
   ],
@@ -326,12 +325,12 @@ window.PRODUTOS_ARARAS = [
  },
  {
   "slug": "arara-prateleira-6rts-2125-preto",
-  "sku": "2125PT",
+  "sku": "2125PR",
   "nome": "Arara Prateleira 6RTS Preta (Ref. 2125)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "999,90",
+  "preco_unit": "999,90",
   "cats": [
    "araras"
   ],
@@ -345,12 +344,12 @@ window.PRODUTOS_ARARAS = [
  },
  {
   "slug": "arara-prateleira-2rts-2128-preto",
-  "sku": "2128PT",
+  "sku": "2128PR",
   "nome": "Arara Prateleira 2RTS Preta (Ref. 2128)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "999,90",
+  "preco_unit": "999,90",
   "cats": [
    "araras"
   ],
@@ -482,8 +481,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara MD Simples Cromada (Ref. 2020)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "379,90",
+  "preco_unit": "379,90",
   "cats": [
    "araras"
   ],
@@ -539,8 +538,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara MD Dupla Cromada (Ref. 2037)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "539,90",
+  "preco_unit": "539,90",
   "cats": [
    "araras"
   ],
@@ -558,8 +557,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara MD Dupla Dourada (Ref. 2037)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "539,90",
+  "preco_unit": "539,90",
   "cats": [
    "araras"
   ],
@@ -577,8 +576,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara MD Dupla Rosé (Ref. 2037)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "539,90",
+  "preco_unit": "539,90",
   "cats": [
    "araras"
   ],
@@ -596,8 +595,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Square Slim Cromada (Ref. 2117)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "799,90",
+  "preco_unit": "799,90",
   "cats": [
    "araras"
   ],
@@ -634,8 +633,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Desfile Square Slim Rosé (Ref. 2117)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "849,90",
+  "preco_unit": "849,90",
   "cats": [
    "araras"
   ],
@@ -710,8 +709,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Triângulo PM Cromada (Ref. 2119)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "849,90",
+  "preco_unit": "849,90",
   "cats": [
    "araras"
   ],
@@ -729,8 +728,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Triângulo PM Dourada (Ref. 2119)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "899,90",
+  "preco_unit": "899,90",
   "cats": [
    "araras"
   ],
@@ -748,8 +747,8 @@ window.PRODUTOS_ARARAS = [
   "nome": "Arara Triângulo PM Rosé (Ref. 2119)",
   "kit": "",
   "unidades": 1,
-  "preco": null,
-  "preco_unit": null,
+  "preco": "899,90",
+  "preco_unit": "899,90",
   "cats": [
    "araras"
   ],
@@ -820,7 +819,7 @@ window.PRODUTOS_ARARAS = [
  },
  {
   "slug": "arara-pm-vintage-2113-preto",
-  "sku": "2113PT",
+  "sku": "2113PR",
   "nome": "Arara PM Vintage Preta (Ref. 2113)",
   "kit": "",
   "unidades": 1,
