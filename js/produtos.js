@@ -14,10 +14,7 @@ window.PRODUTOS = [
   "desc": "Para quem organiza closet ou monta araras de loja, este cabide de madeira maciça entrega a estabilidade que peças pesadas exigem. Os frisos antideslize nos ombros mantêm blusas, camisas e blazers exatamente onde foram pendurados.\n\nO gancho metálico giratório facilita encaixar e retirar o cabide da arara sem esforço, em qualquer ângulo. Um modelo simples de usar e difícil de substituir no dia a dia de uma loja ou provador.\n\nCor: Marfim\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -35,10 +32,7 @@ window.PRODUTOS = [
   "desc": "Araras brancas, closets claros e provadores de varejo encontram neste cabide de madeira maciça o complemento certo. Os frisos antideslize nos ombros seguram a peça no lugar, sem marcas e sem deslizamento.\n\nO gancho metálico giratório permite posicionar o cabide em qualquer direção na arara, o que agiliza bastante a rotina de quem trabalha com grande volume de peças. Acabamento limpo, fácil de manter.\n\nCor: Branco\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -98,10 +92,7 @@ window.PRODUTOS = [
   "desc": "Para montar composições completas na arara sem duplicar o número de cabides, este modelo com barra horizontal é a escolha prática. Feito em madeira maciça, suporta calças e saias na barra inferior enquanto os frisos antideslize mantêm a peça superior firme nos ombros.\n\nO gancho metálico giratório permite retirar e reposicionar o cabide rapidamente, sem travar. Funciona muito bem em araras de loja e closets onde o espaço precisa render.\n\nCor: Branco\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -392,10 +383,7 @@ window.PRODUTOS = [
   "desc": "Blusas de seda, malhas finas, camisas sociais — peças que costumam escorregar ganham um suporte confiável neste cabide de madeira clara com ombros emborrachados pretos e presilhas. O emborrachado antideslize segura o tecido sem deixar marcas, e as presilhas permitem pendurar saias e calças no mesmo cabide.\n\nA madeira clara com o detalhe preto no ombro forma uma combinação discreta e funcional, adequada tanto para araras de loja quanto para closets domésticos. Construção sólida, uso diário sem preocupação.\n\nCor: Madeira Clara com Emborrachado Preto\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -413,10 +401,7 @@ window.PRODUTOS = [
   "desc": "Quem trabalha com moda feminina sabe que o cabide certo evita retrabalho: os ombros emborrachados brancos seguram blusas e vestidos delicados sem escorregar, e as presilhas metálicas ampliam o uso para saias e calças. Tudo em madeira clara, com acabamento limpo e uniforme.\n\nO emborrachado branco protege o tecido com toque suave, sem deixar marcas em peças mais sensíveis. Uma opção prática para araras mistas onde um único cabide precisa dar conta de diferentes tipos de roupa.\n\nCor: Madeira Clara com Emborrachado Branco\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -434,10 +419,7 @@ window.PRODUTOS = [
   "desc": "Desenvolvido para segurar peças que escorregam com facilidade, este cabide de madeira clara tem os ombros revestidos com emborrachado preto antideslize. O resultado é um suporte firme que preserva o caimento da roupa e poupa tempo na organização da arara.\n\nSem presilhas, o formato é ideal para camisas, blazers e peças de ombro estruturado. A madeira clara com o contraste do emborrachado preto compõe uma identidade visual discreta e profissional.\n\nCor: Madeira Clara com Emborrachado Preto\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -455,10 +437,7 @@ window.PRODUTOS = [
   "desc": "Para araras com paleta clara ou ambientes que pedem uniformidade visual, este cabide de madeira clara com emborrachado branco antideslize é uma escolha certeira. Os ombros emborrachados seguram a peça no lugar sem marcar o tecido, mesmo em uso prolongado.\n\nO modelo sem presilhas é indicado para peças de ombro inteiro — blazers, casacos, camisas — onde o cabide precisa acompanhar a estrutura da roupa sem interferir. Acabamento clean, construção confiável.\n\nCor: Madeira Clara com Emborrachado Branco\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -476,10 +455,7 @@ window.PRODUTOS = [
   "desc": "Vitrines e fotos de catálogo ganham outro nível quando a peça é exibida em um cabide silhueta 3D: o corpo em arame prata reproduz o volume do torso e faz a roupa cair como se estivesse vestida. O topo em madeira clara completa a estrutura com leveza e boa aparência.\n\nO arame prata oferece resistência sem peso excessivo, facilitando o manuseio na montagem de vitrines. Uma ferramenta de exposição que valoriza a peça e comunica cuidado com a apresentação da loja.\n\nCor: Madeira Clara com Arame Prata\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -497,10 +473,7 @@ window.PRODUTOS = [
   "desc": "O topo em madeira preta com o arame rosé formam uma combinação atual, muito usada em araras de moda feminina contemporânea e editoriais de produto. O corpo silhueta 3D em arame dá volume à peça exposta, aproximando a apresentação do look real sem precisar de manequim.\n\nFuncional para vitrines, araras de destaque e sessões de foto, o cabide combina apelo visual com praticidade no dia a dia da loja. O arame rosé resiste ao uso contínuo e mantém a forma sem deformar.\n\nCor: Preto com Arame Rosé\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -518,10 +491,7 @@ window.PRODUTOS = [
   "desc": "O Cabide Silhueta 3D reproduz o volume do corpo feminino em arame nobre com topo de madeira, fazendo a peça cair e se moldar como se estivesse vestida — efeito indispensável em vitrines e fotos de catálogo. Bodies, vestidos e malhas ganham presença visual imediata, sem precisar de manequim completo.\n\nO acabamento combina o arame dourado com a estrutura branca, resultando numa peça que não destoam da produção visual da loja. Leve de pendurar, firme o suficiente para sustentar peças de tecido mais pesado.\n\nCor: Branco com Arame Dourado\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -539,10 +509,7 @@ window.PRODUTOS = [
   "desc": "Para quem expõe bodies, biquínis e vestidos e quer que o cliente veja o caimento real da peça, este cabide silhueta em arame nobre com topo de madeira e desenho de corpo feminino resolve sem ocupar o espaço de um manequim. A silhueta guia o olhar do consumidor direto para o produto.\n\nO topo em madeira clara combina com o arame prata, criando um visual clean adequado a araras de loja e closets organizados. Fácil de integrar a qualquer expositor já existente.\n\nCor: Madeira Clara com Arame Prata\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -560,10 +527,7 @@ window.PRODUTOS = [
   "desc": "Quando a vitrine precisa de contraste e presença, a combinação preto com dourado entrega sem esforço. Este cabide silhueta em arame nobre com topo de madeira e desenho de corpo feminino expõe bodies, biquínis e vestidos com o caimento que a peça merece, valorizando cada detalhe do tecido.\n\nO arame dourado sobre a estrutura preta forma um conjunto que conversa bem com araras escuras e produções visuais mais sofisticadas. Prático de encaixar em qualquer expositor padrão.\n\nCor: Preto com Arame Dourado\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -581,10 +545,7 @@ window.PRODUTOS = [
   "desc": "Branco com rosé é uma das combinações mais procuradas por lojas de moda feminina e íntima — e este cabide silhueta em arame nobre com topo de madeira e desenho de corpo feminino entrega exatamente essa paleta. Bodies, biquínis e vestidos ficam expostos com o caimento real da peça, facilitando a decisão de compra.\n\nA estrutura leve não pesa na arara e o arame rosé mantém a identidade visual sem conflitar com etiquetas ou tags de preço. Uma escolha certeira para quem cuida da apresentação dos produtos.\n\nCor: Branco com Arame Rosé\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -602,10 +563,7 @@ window.PRODUTOS = [
   "desc": "O formato especial deste cabide silhueta foi pensado para dar caimento real à peça exposta — a diferença é visível logo que você pendura a primeira roupa. Com estrutura em arame nobre e topo de madeira, ele funciona bem tanto em vitrines quanto em araras internas de loja.\n\nA combinação de madeira clara com arame rosé é versátil e combina com ambientes de decoração neutra ou feminina. Peça única que agrega organização e apelo visual ao mesmo tempo.\n\nCor: Madeira Clara com Arame Rosé\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -623,10 +581,7 @@ window.PRODUTOS = [
   "desc": "Estruturado em arame nobre com topo de madeira, este cabide silhueta especial tem formato desenvolvido para que a peça pendurada apresente caimento real — ideal para quem vende moda e precisa mostrar o produto em seu melhor ângulo. O visual de vitrine fica acessível mesmo em araras do dia a dia.\n\nPreto com dourado é uma das combinações mais procuradas por lojistas que trabalham com paletas escuras ou temáticas premium. O acabamento é uniforme e resistente ao uso contínuo em loja.\n\nCor: Preto com Arame Dourado\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -644,10 +599,7 @@ window.PRODUTOS = [
   "desc": "Simples de usar, eficiente na exposição: este cabide silhueta especial em arame nobre com topo de madeira reproduce o contorno do corpo feminino e entrega caimento real à peça, sem complicação. Uma boa escolha para quem quer resultado visual sem investir em manequins completos.\n\nO acabamento branco com arame prata é neutro o suficiente para se adaptar a qualquer arara ou vitrine, sem chamar mais atenção do que a roupa exposta. Fácil de limpar e de integrar ao estoque atual de cabides.\n\nCor: Branco com Arame Prata\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -665,10 +617,7 @@ window.PRODUTOS = [
   "desc": "O Cabide Silhueta Bailarina tem formato próprio que confere movimento e caimento diferenciado às peças expostas — perceptível especialmente em saias, vestidos fluidos e roupas de dança. A estrutura em arame nobre com topo de madeira garante estabilidade mesmo em araras mais movimentadas.\n\nA versão em madeira clara com arame prata tem acabamento limpo e combina com araras de diferentes estilos, do closet residencial à loja especializada. Um cabide que se justifica pela função antes de qualquer outra coisa.\n\nCor: Madeira Clara com Arame Prata\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -686,10 +635,7 @@ window.PRODUTOS = [
   "desc": "O formato de bailarina reproduz a curva natural do corpo, fazendo com que vestidos, blusas e saias caiam exatamente como ficariam em uma manequim — perfeito para vitrines e araras de destaque. A combinação de topo em madeira com arame dourado entrega um visual que valoriza a peça exposta sem competir com ela.\n\nO arame nobre garante resistência sem peso excessivo, e o acabamento bicolor preto com dourado combina com montagens de loja sofisticadas ou closets organizados com identidade visual. Fácil de encaixar em qualquer arara padrão.\n\nCor: Preto com Arame Dourado\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -707,10 +653,7 @@ window.PRODUTOS = [
   "desc": "Para lojas de moda feminina ou closets com paleta clara, este cabide bailarina em topo de madeira com arame rosé harmoniza com a identidade visual do ambiente sem esforço. O formato em silhueta de bailarina posiciona a roupa com caimento real, aproximando a exposição da experiência de ver a peça vestida.\n\nA madeira no topo confere estrutura e impede que o ombro das peças deforme com o tempo, enquanto o arame rosé acrescenta um acabamento atual e delicado. Compatível com araras padrão de varejo e closets residenciais.\n\nCor: Branco com Arame Rosé\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -728,10 +671,7 @@ window.PRODUTOS = [
   "desc": "Desenvolvido para peças plus size, este cabide silhueta tem estrutura mais ampla que acomoda roupas de numerações maiores sem distorcer ombros nem franzir o tecido. Em lojas especializadas, é o detalhe que profissionaliza a arara e comunica cuidado com o produto exposto.\n\nA madeira escura no topo transmite robustez e estilo, enquanto o arame dourado dá o acabamento que transforma um cabide funcional em elemento visual da vitrine. Construído em arame nobre para suportar uso diário intenso.\n\nCor: Madeira Escura com Arame Dourado\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -749,10 +689,7 @@ window.PRODUTOS = [
   "desc": "A silhueta plus size com acabamento preto e arame rosé une funcionalidade e estética — a estrutura mais larga acomoda peças de maior numeração sem forçar costuras, e a combinação de cores se encaixa bem em araras de moda feminina contemporânea. Ideal para lojas que prezam pela apresentação uniforme do acervo.\n\nFeito em arame nobre, o cabide mantém a forma mesmo com uso frequente. O contraste entre o preto da silhueta e o rosé do arame cria um visual atual sem precisar de nenhum outro elemento decorativo.\n\nCor: Preto com Arame Rosé\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -770,10 +707,7 @@ window.PRODUTOS = [
   "desc": "Branco com arame prata é uma combinação versátil que se adapta a vitrines minimalistas, araras de boutique e closets organizados por cor. A estrutura plus size garante que blusas, vestidos e casacos de numerações maiores sejam expostos com o mesmo cuidado dado às demais peças do acervo.\n\nO arame nobre sustenta bem o peso sem perder a forma, e o acabamento prata confere limpeza visual ao conjunto. Um cabide que funciona tanto no dia a dia de uma loja movimentada quanto em um closet residencial bem montado.\n\nCor: Branco com Arame Prata\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -791,10 +725,7 @@ window.PRODUTOS = [
   "desc": "O cabide silhueta collant foi projetado especificamente para expor bodies, collants, maiôs e peças de contorno — formatos que perdem completamente a leitura em cabides convencionais. Com a silhueta em arame nobre no formato dourado, a peça fica posicionada de maneira que o cliente consegue visualizar o produto como se estivesse vestido.\n\nO acabamento dourado confere presença visual à arara, tornando a exposição mais atrativa sem necessidade de recursos adicionais. Resistente e leve, encaixa em araras padrão de varejo e suporta uso contínuo em loja.\n\nCor: Dourado\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -812,10 +743,7 @@ window.PRODUTOS = [
   "desc": "Para quem trabalha com moda íntima, fitness ou dança, expor collants e bodies de forma legível é um desafio — este cabide silhueta em arame nobre rosé resolve isso ao reproduzir o contorno corporal e apresentar a peça com clareza real. O resultado é uma arara que vende melhor porque o cliente entende o produto de imediato.\n\nO tom rosé funciona bem em ambientes de lingerie, moda feminina e dancewear, integrando-se à identidade visual da loja sem esforço. Leve, fácil de encaixar e resistente ao uso diário.\n\nCor: Rosé\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -833,10 +761,7 @@ window.PRODUTOS = [
   "desc": "A versão prata do cabide silhueta collant entrega um acabamento neutro e limpo, ideal para lojas que trabalham com araras monócromas ou ambientes de vitrine com paleta fria. O formato em silhueta de arame nobre expõe collants, bodies e peças de contorno de forma que o cliente visualiza o caimento real antes mesmo de tocar na peça.\n\nO arame prata combina com estruturas metálicas de arara, ganchos cromados e araras brancas ou pretas — garantindo coesão visual sem exigir adaptação. Prático, resistente e de encaixe padrão.\n\nCor: Prata\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -854,10 +779,7 @@ window.PRODUTOS = [
   "desc": "Em acrílico cristal, este cabide fino some no fundo da arara e deixa toda a atenção para a peça exposta — exatamente o que as lojas de moda feminina precisam em araras de destaque. O perfil estreito também permite encaixar mais peças por metro linear, aproveitando melhor o espaço da vitrine ou do closet.\n\nO acabamento em acrílico cristal é uniforme e resistente a arranhões do dia a dia, mantendo a aparência limpa mesmo após uso intenso. Leve de manusear e fácil de repor em quantidade.\n\nCor: Transparente\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -896,10 +818,7 @@ window.PRODUTOS = [
   "desc": "Quando o mix da arara vai de blusas a camisarias, este cabide médio em acrílico cristal resolve sem precisar separar peças por tipo. A espessura intermediária acomoda bem a maioria das peças do vestuário feminino e masculino sem marcar nem alargar os ombros.\n\nPráticos para reposição constante em loja, combinam com araras cromadas ou lacadas sem quebrar a harmonia visual do ambiente. Resistentes e de fácil limpeza com pano úmido.\n\nCor: Transparente\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -1001,10 +920,7 @@ window.PRODUTOS = [
   "desc": "Expor um conjunto completo — blusa e saia, ou calça e blazer — no mesmo cabide organiza a arara e induz a venda por combinação, recurso comum em boutiques e lojas de moda premium. O gancho giratório facilita a troca e o reposicionamento sem tirar a peça superior, enquanto as presilhas seguram a parte inferior sem marcar.\n\nTudo em acrílico cristal, o que garante discrição visual mesmo em araras muito cheias. Um investimento simples que profissionaliza a apresentação de conjuntos em qualquer ponto de venda.\n\nCor: Transparente\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -1064,10 +980,7 @@ window.PRODUTOS = [
   "desc": "As pontas abertas são o detalhe que faz diferença no dia a dia da loja: peças com alças entram e saem do cabide com um movimento só, sem precisar passar pelo gancho central. Para equipes que repõem estoque rapidamente ou atendem em ritmo intenso, essa agilidade conta.\n\nFeito em acrílico cristal, o design cavado deixa a silhueta da peça mais visível na arara. Acabamento transparente que não interfere na leitura do produto exposto.\n\nCor: Transparente\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2070,9 +1983,7 @@ window.PRODUTOS = [
   "fotos": 4,
   "galeria": [
    "",
-   "-2",
-   "-ombro",
-   "-det"
+   "-2"
   ]
  },
  {
@@ -2153,10 +2064,7 @@ window.PRODUTOS = [
   "desc": "Madeira no corpo e gancho rosé no acabamento: uma combinação que funciona muito bem em lojas infantis com identidade visual feminina ou em quartos de bebê decorados em tons claros. As presilhas metálicas prendem as peças com segurança.\n\nO tamanho proporcional às roupas infantis evita que as peças fiquem tortas ou com marcas nos ombros. Acabamento limpo, sem rebarbas, seguro para manusear diariamente.\n\nCor: Branco / Gancho Rosé\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2216,10 +2124,7 @@ window.PRODUTOS = [
   "desc": "Com a barra transversal, este cabide infantil de madeira permite pendurar conjunto completo de uma vez — camiseta em cima, calça na barra — sem precisar de dois cabides separados. Prático para o dia a dia e para a apresentação em loja.\n\nO branco é uma das cores mais pedidas para araras de quarto infantil e vitrines de moda kids, por deixar o foco total nas peças. Acabamento uniforme, sem lascas, seguro para uso contínuo.\n\nCor: Branco\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2279,10 +2184,7 @@ window.PRODUTOS = [
   "desc": "Quem monta araras de moda infantil sabe que o cabide errado amassa ombro e estraga a apresentação da peça. Em madeira maciça e com gancho metálico, este modelo sustenta bem o tecido e mantém cada roupinha no formato correto, do closet em casa à arara da loja.\n\nO acabamento branco é neutro e versátil, funcionando tanto em ambientes minimalistas quanto em lojas com identidade visual mais colorida. O gancho metálico gira com facilidade e se encaixa em araras de diâmetro padrão.\n\nCor: Branco\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2385,10 +2287,7 @@ window.PRODUTOS = [
   "desc": "A combinação de arame prata com topo em madeira entrega um cabide infantil com visual diferenciado — o tipo de peça que valoriza a vitrine de uma loja kids sem precisar de nenhum outro elemento decorativo. O formato silhueta reproduz o contorno do corpo infantil, mantendo as peças bem posicionadas e com caimento natural.\n\nO arame estruturado sustenta bem o peso das roupas e o topo em madeira evita marcas nos ombros das peças. Um modelo que equilibra função e apresentação visual para quem cuida da exposição de moda infantil com atenção.\n\nCor: Madeira Arame Prata\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2407,10 +2306,7 @@ window.PRODUTOS = [
   "desc": "Para lojas de moda infantil que valorizam apresentação, este cabide silhueta em arame com topo de madeira organiza as peças com charme e deixa a vitrine mais atrativa para os pequenos clientes.\nO acabamento branco com arame dourado combina com diferentes estilos de decoração — e a estrutura em madeira garante firmeza no gancho sem pesar no bolso.\n\nCor: Branco Arame Dourado\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2429,10 +2325,7 @@ window.PRODUTOS = [
   "desc": "Ideal para boutiques kids que apostam num visual mais atual, este cabide silhueta une arame com topo de madeira num formato que valoriza cada peça exposta.\nA combinação preto com arame rose traz contraste elegante à araras e gôndolas, tornando a exposição da coleção mais coerente e caprichada.\n\nCor: Preto Arame Rose\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2451,10 +2344,7 @@ window.PRODUTOS = [
   "desc": "O formato bailarina dá personalidade à exposição de moda kids — perfeito para destacar vestidos, saias e conjuntos nas araras de loja ou em closets infantis.\nConstituído por arame com topo de madeira natural, o acabamento madeira com arame prata entrega leveza visual sem abrir mão da resistência do gancho.\n\nCor: Madeira Arame Prata\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2473,10 +2363,7 @@ window.PRODUTOS = [
   "desc": "Pensado para quem expõe moda infantil com cuidado, o cabide silhueta bailarina apresenta as peças de forma delicada e organizada — um detalhe que o cliente percebe antes mesmo de tocar na roupa.\nA estrutura em arame com topo de madeira no acabamento branco e dourado harmoniza com vitrines claras e decorações de closet infantil.\n\nCor: Branco Arame Dourado\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
@@ -2495,10 +2382,7 @@ window.PRODUTOS = [
   "desc": "Para lojistas que querem diferenciar a apresentação da coleção feminina infantil, o formato bailarina organiza as peças com personalidade e facilita a visualização pelo cliente.\nO arame com topo de madeira no acabamento preto e rose cria um contraste moderno, adequado tanto para araras de loja quanto para quartos e closets com identidade visual definida.\n\nCor: Preto Arame Rose\nVendido por unidade.",
   "fotos": 4,
   "galeria": [
-   "",
-   "-ombro",
-   "-base",
-   "-det"
+   ""
   ]
  },
  {
