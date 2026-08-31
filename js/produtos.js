@@ -993,9 +993,10 @@ window.PRODUTOS = [
    "silhuetas"
   ],
   "desc": "O formato de corpo faz este cabide trabalhar como um expositor compacto: bodies, maiôs e lingeries ganham volume e forma na arara, muito mais próximos do caimento real da peça. O resultado é uma vitrine que comunica o produto antes mesmo de o cliente pegar na mão.\n\nTodo em acrílico cristal, a silhueta transparente valoriza estampas e rendas sem disputar atenção com o tecido. Prático de pendurar e de limpar, adequado para uso contínuo em loja.\n\nCor: Transparente\nVendido por unidade.",
-  "fotos": 2,
+  "fotos": 3,
   "galeria": [
    "",
+   "-2",
    "-med"
   ]
  },
