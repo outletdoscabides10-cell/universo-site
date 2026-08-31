@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://universodoscabides.com.br/sitemap.xml

@@ -327,6 +327,14 @@ const cartFeedback = document.getElementById('cartFeedback');
 let cart = {};
 try { cart = JSON.parse(localStorage.getItem('univ_cart') || '{}'); } catch (e) { cart = {}; }
 
+// vindo da página de produto com "Ver sacola" (#sacola): abre o carrinho já cheio
+window.addEventListener('load', () => {
+  if (location.hash === '#sacola') {
+    history.replaceState(null, '', location.pathname);
+    openCart();
+  }
+});
+
 const prodBySlug = (slug) => window.PRODUTOS.find((p) => p.slug === slug);
 
 function saveCart() {
@@ -625,6 +633,13 @@ function pararApresentacao() {
 }
 
 function abrirProduto(slug) {
+  // Página de produto de verdade (p/<slug>.html): URL própria, SEO e link
+  // compartilhável — o modal antigo fica de reserva se a página não existir.
+  location.href = `p/${slug}.html`;
+  return;
+}
+
+function abrirProdutoModal(slug) {   // (reserva — não usado no fluxo atual)
   const p = prodBySlug(slug);
   if (!p) return;
   pvSlug = slug;
