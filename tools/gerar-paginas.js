@@ -12,6 +12,8 @@ require(path.join(__dirname, '..', 'js', 'produtos-araras.js'));
 const PRODUTOS = window.PRODUTOS;
 
 const SITE = 'https://universodoscabides.com.br';
+// versão nas URLs das fotos: navegador nunca mais serve imagem velha do cache
+const VFOTO = 'v' + new Date().toISOString().slice(0, 10).replace(/-/g, '');
 
 /* Avaliações REAIS importadas do Mercado Livre (data/avaliacoes.json,
    gerado pela coleta via API — nota e texto de compradores de verdade). */
@@ -69,7 +71,7 @@ function fotosDe(p) {
   const sufixos = (p.galeria && p.galeria.length)
     ? p.galeria
     : Array.from({ length: p.fotos || 1 }, (_, i) => (i ? '-' + (i + 1) : ''));
-  return sufixos.map((s) => `assets/products/${p.slug}${s}.webp`);
+  return sufixos.map((s) => `assets/products/${p.slug}${s}.webp?${VFOTO}`);
 }
 
 const SELOS = `
@@ -170,7 +172,7 @@ function paginaHTML(p) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260827b">
+  <link rel="stylesheet" href="../css/style.css?v=20260831e">
   <link rel="icon" href="../assets/favicon-64.png" type="image/png">
   <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 </head>
