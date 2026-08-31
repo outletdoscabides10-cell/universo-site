@@ -1366,9 +1366,9 @@ window.PRODUTOS = [
   "nome": "Cabide Silhueta Preto",
   "sku": "4241PR",
   "kit": "",
-  "preco": "9,00",
+  "preco": "7,00",
   "unidades": 1,
-  "preco_unit": "9,00",
+  "preco_unit": "7,00",
   "cats": [
    "cabides",
    "plastico",
@@ -1735,9 +1735,9 @@ window.PRODUTOS = [
   "nome": "Cabide Silhueta Prata",
   "sku": "4241PT",
   "kit": "",
-  "preco": "9,00",
+  "preco": "8,00",
   "unidades": 1,
-  "preco_unit": "9,00",
+  "preco_unit": "8,00",
   "cats": [
    "cabides",
    "plastico",
