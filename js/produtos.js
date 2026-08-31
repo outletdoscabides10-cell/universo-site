@@ -1376,9 +1376,10 @@ window.PRODUTOS = [
    "silhuetas"
   ],
   "desc": "Com formato que imita a silhueta do corpo, este cabide comunica ao cliente como a peça vai assentar — o que aumenta a percepção de valor na vitrine e no ponto de venda sem o custo de um busto completo. Em plástico resistente, entrega a estética de uma exposição mais elaborada com praticidade e preço acessível.\n\nO acabamento preto dá seriedade à apresentação e funciona bem em grifes, multimarcas e lojas de moda feminina. Fácil de usar em araras convencionais, sem adaptações.\n\nCor: Preto\nVendido por unidade.",
-  "fotos": 2,
+  "fotos": 3,
   "galeria": [
    "",
+   "-2",
    "-med"
   ]
  },
