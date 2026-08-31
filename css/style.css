@@ -2029,8 +2029,8 @@ button { font-family: inherit; }
 .pp-palco { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); display: grid; place-items: center; aspect-ratio: 1; padding: 0; overflow: hidden; }
 .pp-palco img { width: 100%; height: 100%; object-fit: cover; }
 .pp-thumbs { display: flex; gap: 10px; margin-top: 12px; flex-wrap: wrap; }
-.pp-thumb { width: 66px; height: 66px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; padding: 5px; cursor: pointer; transition: border-color 160ms ease; }
-.pp-thumb img { width: 100%; height: 100%; object-fit: contain; mix-blend-mode: multiply; }
+.pp-thumb { width: 66px; height: 66px; border: 1.5px solid var(--line); border-radius: 12px; background: #fff; padding: 0; overflow: hidden; cursor: pointer; transition: border-color 160ms ease; }
+.pp-thumb img { width: 100%; height: 100%; object-fit: cover; border-radius: 10px; }
 .pp-thumb.is-on, .pp-thumb:hover { border-color: var(--blue-600); }
 .pp-info { background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px 28px 30px; }
 .pp-cat { font: 700 11.5px/1 var(--font); letter-spacing: 0.07em; text-transform: uppercase; color: var(--blue-600); }

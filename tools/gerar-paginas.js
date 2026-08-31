@@ -172,7 +172,7 @@ function paginaHTML(p) {
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="../css/style.css?v=20260831e">
+  <link rel="stylesheet" href="../css/style.css?v=20260831f">
   <link rel="icon" href="../assets/favicon-64.png" type="image/png">
   <script type="application/ld+json">${JSON.stringify(jsonld)}</script>
 </head>
