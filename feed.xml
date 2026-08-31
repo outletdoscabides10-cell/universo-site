@@ -1500,6 +1500,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2124CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-square-2124-dourado</g:id>
@@ -1515,6 +1516,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2124DO</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-square-2124-rose</g:id>
@@ -1530,6 +1532,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2124RS</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-square-2126-cromado</g:id>
@@ -1545,6 +1548,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2126CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-square-2126-dourado</g:id>
@@ -1560,6 +1564,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2126DO</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-square-2126-rose</g:id>
@@ -1575,6 +1580,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2126RS</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-royal-2122-cromado</g:id>
@@ -1590,6 +1596,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2122CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-royal-2122-dourado</g:id>
@@ -1605,6 +1612,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2122DO</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-royal-2122-rose</g:id>
@@ -1620,6 +1628,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2122RS</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-duplo-square-2127-cromado</g:id>
@@ -1635,6 +1644,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2127CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-duplo-square-2127-dourado</g:id>
@@ -1650,6 +1660,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2127DO</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-duplo-square-2127-rose</g:id>
@@ -1665,6 +1676,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2127RS</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-duplo-square-base-2130-cromado</g:id>
@@ -1680,6 +1692,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2130CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-duplo-square-base-2130-dourado</g:id>
@@ -1695,6 +1708,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2130DO</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-duplo-square-base-2130-rose</g:id>
@@ -1710,6 +1724,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2130RS</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-simples-2050-dourado</g:id>
@@ -1725,6 +1740,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2050DO</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-prateleira-6rts-2125-preto</g:id>
@@ -1740,6 +1756,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2125PR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-prateleira-2rts-2128-preto</g:id>
@@ -1755,6 +1772,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2128PR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-md-simples-2020-cromado</g:id>
@@ -1770,6 +1788,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2020CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-md-dupla-2037-cromado</g:id>
@@ -1785,6 +1804,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2037CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-md-dupla-2037-dourado</g:id>
@@ -1800,6 +1820,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2037DO</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-md-dupla-2037-rose</g:id>
@@ -1815,6 +1836,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2037RS</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-square-slim-2117-cromado</g:id>
@@ -1830,6 +1852,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2117CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-desfile-square-slim-2117-rose</g:id>
@@ -1845,6 +1868,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2117RS</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-triangulo-pm-2119-cromado</g:id>
@@ -1860,6 +1884,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2119CR</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-triangulo-pm-2119-dourado</g:id>
@@ -1875,6 +1900,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2119DO</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 <item>
   <g:id>arara-triangulo-pm-2119-rose</g:id>
@@ -1890,6 +1916,7 @@
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>2119RS</g:mpn>
+  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>
 </item>
 </channel>
 </rss>

@@ -47,7 +47,7 @@ ${extras ? extras + '\n' : ''}  <g:price>${valor} BRL</g:price>
   <g:brand>Universo dos Cabides</g:brand>
   <g:identifier_exists>no</g:identifier_exists>
   <g:mpn>${esc(p.sku || p.slug)}</g:mpn>
-</item>`);
+${(p.cats || []).includes('araras') ? `  <g:shipping><g:country>BR</g:country><g:price>149.90 BRL</g:price></g:shipping>\n` : ''}</item>`);
 }
 
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
