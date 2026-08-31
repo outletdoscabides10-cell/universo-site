@@ -1144,18 +1144,29 @@ document.getElementById('year').textContent = new Date().getFullYear();
   const backdrop = document.getElementById('roletaBackdrop');
   if (!backdrop) return;
 
+  // Sem popup automático (parecia site de leilão): a roleta agora vive numa
+  // abinha discreta na lateral — o cliente abre se quiser.
+  const aba = document.getElementById('roletaAbrir');
   const prox = parseInt(localStorage.getItem('univ_roleta_prox') || '0', 10);
   if (Date.now() < prox) return;
-
-  setTimeout(() => { backdrop.hidden = false; requestAnimationFrame(() => backdrop.classList.add('is-open')); }, 4500);
+  if (aba) {
+    aba.hidden = false;
+    aba.addEventListener('click', () => {
+      backdrop.hidden = false;
+      requestAnimationFrame(() => backdrop.classList.add('is-open'));
+    });
+  }
 
   function fechar(diasAteVoltar) {
     backdrop.classList.remove('is-open');
     setTimeout(() => { backdrop.hidden = true; }, 300);
-    localStorage.setItem('univ_roleta_prox', String(Date.now() + diasAteVoltar * 864e5));
+    if (diasAteVoltar >= 7) {
+      localStorage.setItem('univ_roleta_prox', String(Date.now() + diasAteVoltar * 864e5));
+      if (aba) aba.hidden = true;
+    }
   }
 
-  document.getElementById('roletaFechar').addEventListener('click', () => fechar(1));
+  document.getElementById('roletaFechar').addEventListener('click', () => fechar(0));
 
   let girou = false;
   document.getElementById('roletaGirar').addEventListener('click', () => {
@@ -1177,7 +1188,7 @@ document.getElementById('year').textContent = new Date().getFullYear();
       const expira = Date.now() + 3 * 864e5;
       localStorage.setItem('univ_roleta', JSON.stringify({ codigo: premio.codigo, expira }));
       localStorage.setItem('univ_roleta_prox', String(Date.now() + 7 * 864e5));
-      document.getElementById('roletaParabens').textContent = `Você ganhou ${premio.rotulo}! 🎉`;
+      document.getElementById('roletaParabens').textContent = `Você ganhou ${premio.rotulo}!`;
       document.getElementById('roletaCodigo').textContent = premio.codigo;
       const dt = new Date(expira);
       document.getElementById('roletaValidade').textContent =
