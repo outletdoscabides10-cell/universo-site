@@ -2086,3 +2086,22 @@ button { font-family: inherit; }
   .pp-nav { gap: 14px; font-size: 13px; }
   .pp-nav a:not(.pp-sacola):first-child { display: none; }
 }
+
+/* ---------------- Avaliações reais (página de produto) ---------------- */
+.pp-nota { display: inline-flex; align-items: center; gap: 7px; margin: -6px 0 12px; font-size: 13.5px; color: var(--ink-soft); cursor: pointer; }
+.pp-nota b { color: var(--navy-900); font-size: 14px; }
+.pp-nota:hover span:last-child { text-decoration: underline; }
+.pp-estrelas { display: inline-flex; gap: 2px; }
+.pp-estrelas .est { width: 15px; height: 15px; fill: #d8dfe9; }
+.pp-estrelas .est.on { fill: var(--gold-500); }
+.pp-aval { margin-top: 44px; background: #fff; border: 1px solid var(--line); border-radius: var(--radius-lg); padding: 26px 28px; }
+.pp-aval h2 { font-size: 20px; color: var(--navy-900); margin-bottom: 16px; }
+.pp-aval-resumo { display: flex; align-items: center; gap: 14px; padding-bottom: 16px; border-bottom: 1px solid var(--line); margin-bottom: 16px; }
+.pp-aval-resumo strong { font-size: 42px; font-weight: 800; color: var(--navy-900); line-height: 1; letter-spacing: -0.02em; }
+.pp-aval-resumo .pp-estrelas .est { width: 18px; height: 18px; }
+.pp-aval-resumo p { font-size: 13px; color: var(--ink-soft); margin-top: 3px; }
+.pp-aval-lista { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.pp-aval-item { background: var(--bg-soft); border-radius: var(--radius); padding: 16px 18px; }
+.pp-aval-item blockquote { font-size: 14.5px; color: var(--ink); line-height: 1.6; margin: 8px 0 10px; }
+.pp-aval-item figcaption { font-size: 12px; color: var(--ink-soft); }
+@media (max-width: 860px) { .pp-aval-lista { grid-template-columns: 1fr; } }

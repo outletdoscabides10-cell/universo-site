@@ -13,6 +13,31 @@ const PRODUTOS = window.PRODUTOS;
 
 const SITE = 'https://universodoscabides.com.br';
 
+/* Avaliações REAIS importadas do Mercado Livre (data/avaliacoes.json,
+   gerado pela coleta via API — nota e texto de compradores de verdade). */
+let AVAL = {};
+try {
+  AVAL = JSON.parse(fs.readFileSync(path.join(__dirname, '..', 'data', 'avaliacoes.json'), 'utf8'));
+} catch (e) { /* sem arquivo = páginas saem sem avaliações */ }
+
+const EQ_COR = { PC: ['PR'], BC: ['BR', 'BG', 'BP'], RC: ['RS'], CC: ['CZ'], PS: ['PT'], TF: ['TR'], PF: ['PR'] };
+function avalDe(sku) {
+  sku = (sku || '').toUpperCase();
+  if (AVAL[sku]) return AVAL[sku];
+  const pref = sku.slice(0, -2), cod = sku.slice(-2);
+  for (const c of (EQ_COR[cod] || [])) if (AVAL[pref + c]) return AVAL[pref + c];
+  return null;
+}
+
+function estrelas(nota) {
+  const cheias = Math.round(nota);
+  let s = '';
+  for (let i = 1; i <= 5; i++) {
+    s += `<svg viewBox="0 0 20 20" class="est${i <= cheias ? ' on' : ''}"><path d="M10 1.8l2.5 5.1 5.6.8-4 3.9.9 5.6-5-2.6-5 2.6.9-5.6-4-3.9 5.6-.8z"/></svg>`;
+  }
+  return s;
+}
+
 /* — mesmos agrupamentos do main.js (cor = variação do mesmo prefixo de SKU) — */
 const GRUPOS = {};
 PRODUTOS.forEach((p) => {
@@ -88,6 +113,7 @@ function paginaHTML(p) {
           <strong>${r.preco_unit ? 'R$ ' + r.preco_unit + ' /un' : 'Consulte'}</strong>
         </a>`).join('');
 
+  const aval = avalDe(p.sku);
   const jsonld = {
     '@context': 'https://schema.org', '@type': 'Product',
     name: p.nome, sku: p.sku || undefined,
@@ -96,7 +122,36 @@ function paginaHTML(p) {
     brand: { '@type': 'Brand', name: 'Universo dos Cabides' },
     ...(temPreco ? { offers: { '@type': 'Offer', priceCurrency: 'BRL', price: preco,
       availability: 'https://schema.org/InStock', url: `${SITE}/p/${p.slug}.html` } } : {}),
+    ...(aval && aval.total ? { aggregateRating: { '@type': 'AggregateRating',
+      ratingValue: aval.media, reviewCount: aval.total } } : {}),
   };
+
+  const notaTopo = aval && aval.total ? `
+        <a class="pp-nota" href="#avaliacoes">
+          <span class="pp-estrelas">${estrelas(aval.media)}</span>
+          <b>${String(aval.media).replace('.', ',')}</b>
+          <span>· ${aval.total} avaliaç${aval.total === 1 ? 'ão' : 'ões'} no Mercado Livre</span>
+        </a>` : '';
+
+  const meses = ['jan', 'fev', 'mar', 'abr', 'mai', 'jun', 'jul', 'ago', 'set', 'out', 'nov', 'dez'];
+  const blocoAval = aval && aval.total ? `
+    <section class="pp-aval" id="avaliacoes" aria-label="Avaliações de compradores">
+      <h2>Avaliações de quem comprou</h2>
+      <div class="pp-aval-resumo">
+        <strong>${String(aval.media).replace('.', ',')}</strong>
+        <div><span class="pp-estrelas">${estrelas(aval.media)}</span>
+        <p>${aval.total} avaliaç${aval.total === 1 ? 'ão' : 'ões'} reais · importadas do Mercado Livre</p></div>
+      </div>
+      ${aval.avaliacoes && aval.avaliacoes.length ? `<div class="pp-aval-lista">
+        ${aval.avaliacoes.map((r) => {
+          const dt = r.date ? `${meses[parseInt(r.date.slice(5, 7), 10) - 1]}/${r.date.slice(0, 4)}` : '';
+          return `<figure class="pp-aval-item">
+          <span class="pp-estrelas">${estrelas(r.rate || 5)}</span>
+          <blockquote>${esc(r.content)}</blockquote>
+          <figcaption>Comprador verificado · Mercado Livre${dt ? ' · ' + dt : ''}</figcaption>
+        </figure>`; }).join('')}
+      </div>` : ''}
+    </section>` : '';
 
   const zap = `https://wa.me/5511952300060?text=${encodeURIComponent(`Olá! Vi no site e tenho interesse em o produto ${p.nome}${p.sku ? ' (SKU ' + p.sku + ')' : ''}. Pode me ajudar?`)}`;
 
@@ -150,7 +205,7 @@ function paginaHTML(p) {
 
       <section class="pp-info">
         <span class="pp-cat">${esc(CAT_LABEL[cat] || cat)}${p.sku ? ' · SKU ' + esc(p.sku) : ''}</span>
-        <h1>${esc(p.nome)}</h1>
+        <h1>${esc(p.nome)}</h1>${notaTopo}
         ${cores}
         <div class="pp-preco">${temPreco
           ? `<strong>R$ ${p.preco_unit}</strong><span>/ unidade</span>`
@@ -169,6 +224,8 @@ function paginaHTML(p) {
         </div>
       </section>
     </div>
+
+    ${blocoAval}
 
     ${relacionados ? `
     <section class="pp-rel" aria-label="Você também pode gostar">
