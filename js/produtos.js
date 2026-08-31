@@ -981,7 +981,7 @@ window.PRODUTOS = [
  },
  {
   "slug": "cabide-silhueta-de-acrilico-4241tr",
-  "nome": "Cabide Silhueta de Acrílico",
+  "nome": "Cabide Silhueta Adulto de Acrílico",
   "sku": "4241TR",
   "kit": "",
   "preco": "9,00",
@@ -1364,7 +1364,7 @@ window.PRODUTOS = [
  },
  {
   "slug": "cabide-silhueta-preto-4241pr",
-  "nome": "Cabide Silhueta Preto",
+  "nome": "Cabide Silhueta Adulto Preto",
   "sku": "4241PR",
   "kit": "",
   "preco": "7,00",
@@ -1734,7 +1734,7 @@ window.PRODUTOS = [
  },
  {
   "slug": "cabide-silhueta-prata-4241pt",
-  "nome": "Cabide Silhueta Prata",
+  "nome": "Cabide Silhueta Adulto Prata",
   "sku": "4241PT",
   "kit": "",
   "preco": "8,00",
