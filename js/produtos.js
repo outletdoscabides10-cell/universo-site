@@ -1747,9 +1747,10 @@ window.PRODUTOS = [
    "silhuetas"
   ],
   "desc": "O formato de corpo deste cabide faz toda a diferença na hora de expor peças na vitrine ou arara: a silhueta valoriza o caimento da roupa e facilita a decisão de compra do cliente. Ideal para lojas que querem apresentar camisas, vestidos e blusas com mais apelo visual.\n\nConfeccionado em plástico prata, o acabamento uniforme garante conjunto harmônico quando agrupado na arara. Leve e fácil de manusear no dia a dia do estoque.\n\nCor: Prata\nVendido por unidade.",
-  "fotos": 2,
+  "fotos": 3,
   "galeria": [
    "",
+   "-2",
    "-med"
   ]
  },
