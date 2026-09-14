@@ -342,7 +342,7 @@ function paginaHTML(p) {
   <footer class="pp-foot">
     <div class="container pp-foot-inner">
       <span>© <span id="ano"></span> Universo dos Cabides · CNPJ 20.142.079/0005-26</span>
-      <span><a href="../privacidade.html">Privacidade</a> · <a href="../termos.html">Termos de uso</a></span>
+      <span><a href="../sobre.html">Quem somos</a> · <a href="../envio.html">Envio</a> · <a href="../trocas.html">Trocas</a> · <a href="../privacidade.html">Privacidade</a> · <a href="../termos.html">Termos</a></span>
     </div>
   </footer>
 
@@ -451,7 +451,7 @@ function categoriaHTML(cat, cfg) {
   <footer class="pp-foot">
     <div class="container pp-foot-inner">
       <span>© <span id="ano"></span> Universo dos Cabides · CNPJ 20.142.079/0005-26</span>
-      <span><a href="../privacidade.html">Privacidade</a> · <a href="../termos.html">Termos de uso</a></span>
+      <span><a href="../sobre.html">Quem somos</a> · <a href="../envio.html">Envio</a> · <a href="../trocas.html">Trocas</a> · <a href="../privacidade.html">Privacidade</a> · <a href="../termos.html">Termos</a></span>
     </div>
   </footer>
   <script>document.getElementById('ano').textContent = new Date().getFullYear();</script>
@@ -469,7 +469,7 @@ for (const [cat, cfg] of Object.entries(CATEGORIAS)) {
 
 /* sitemap com a home + categorias + todas as páginas de produto */
 const hoje = new Date().toISOString().slice(0, 10);
-const urls = [`${SITE}/`]
+const urls = [`${SITE}/`, `${SITE}/sobre.html`, `${SITE}/envio.html`, `${SITE}/trocas.html`]
   .concat(Object.keys(CATEGORIAS).map((c) => `${SITE}/c/${c}.html`))
   .concat(PRODUTOS.map((p) => `${SITE}/p/${p.slug}.html`));
 const sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n` +
