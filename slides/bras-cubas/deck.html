@@ -1,0 +1,498 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Memórias Póstumas de Brás Cubas — apresentação</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{
+    --carvao:#1E1B18; --carvao-2:#3A332C;
+    --sepia:#7A5C42;  --sepia-2:#A98A6B;
+    --dourado:#B08D3F; --dourado-2:#D8BC7A;
+    --papel:#F3EDE1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#26231F}
+  body{padding:26px 0}
+
+  /* ===== palco: 1280×720 por slide ===== */
+  .slide{
+    position:relative;width:1280px;height:720px;overflow:hidden;
+    margin:0 auto 26px;
+    /* A textura vem assada em JPG: 18 slides com feTurbulence ao vivo
+       deixariam a página lenta e travariam o printToPDF. */
+    background:var(--papel) url("export/papel-1920.jpg") center/100% 100% no-repeat;
+    color:var(--carvao);
+    font-family:'Inter',system-ui,sans-serif;
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+
+  .moldura{position:absolute;inset:34px;border:1px solid rgba(122,92,66,.26)}
+  .moldura i{position:absolute;width:15px;height:15px;border:1px solid var(--dourado);opacity:.75}
+  .moldura i:nth-child(1){top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .moldura i:nth-child(2){top:-1px;right:-1px;border-left:0;border-bottom:0}
+  .moldura i:nth-child(3){bottom:-1px;left:-1px;border-right:0;border-top:0}
+  .moldura i:nth-child(4){bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+  .rodape{
+    position:absolute;left:34px;right:34px;bottom:34px;height:46px;
+    display:flex;align-items:center;justify-content:space-between;padding:0 26px;
+    font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--sepia-2);
+  }
+  .rodape .num{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;letter-spacing:.06em;color:var(--sepia)}
+
+  .corpo{position:absolute;inset:34px 34px 80px;display:flex;flex-direction:column;justify-content:center}
+
+  /* ===== tipografia compartilhada ===== */
+  .sobrelinha{
+    display:flex;align-items:center;gap:16px;
+    font-size:11px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--sepia);margin-bottom:22px;
+  }
+  .sobrelinha::after{content:"";height:1px;flex:1;background:linear-gradient(to right,rgba(176,141,63,.75),rgba(176,141,63,0))}
+  h1,h2{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;letter-spacing:-.006em;line-height:1.04}
+  h1{font-size:62px}
+  h2{font-size:44px}
+  h1 em,h2 em{font-style:italic;color:var(--sepia)}
+  .regua{width:72px;height:2px;background:var(--dourado);margin:24px 0 20px}
+  .fonte{font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--sepia-2)}
+
+  .topicos{list-style:none;display:flex;flex-direction:column;gap:17px}
+  /* li em bloco, marcador absoluto: com display:flex cada <b> viraria um item
+     de flex e o texto corrido se quebraria em colunas. */
+  .topicos li{position:relative;display:block;padding-left:22px;
+    font-size:17px;font-weight:300;line-height:1.52;color:var(--carvao-2);max-width:62ch}
+  .topicos li::before{content:"";position:absolute;left:0;top:9px;width:7px;height:7px;
+    background:var(--dourado);transform:rotate(45deg)}
+  .topicos b{font-weight:500;color:var(--carvao)}
+
+  /* ===== 1. capa ===== */
+  .l-capa .corpo{display:grid;grid-template-columns:452px 1px 1fr;justify-content:initial}
+  .arte{display:flex;align-items:center;justify-content:center}
+  .arte svg{width:420px;height:420px;display:block}
+  .filete{background:linear-gradient(to bottom,
+    rgba(122,92,66,0) 0%, rgba(122,92,66,.28) 12%,
+    rgba(176,141,63,.60) 50%, rgba(122,92,66,.28) 88%, rgba(122,92,66,0) 100%);}
+  .capa-txt{display:flex;flex-direction:column;justify-content:center;padding:56px 56px 56px 64px}
+  .capa-txt blockquote{font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:24px;font-style:italic;line-height:1.42;color:var(--sepia);max-width:31ch}
+  .apresentador{margin-top:34px;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--sepia-2)}
+
+  /* ===== 2. divisor de seção ===== */
+  .l-secao .corpo{align-items:center;text-align:center}
+  .romano{font-family:'Cormorant Garamond',Georgia,serif;font-size:112px;line-height:.9;color:var(--dourado)}
+  .l-secao h2{font-size:54px;margin-top:10px}
+  .l-secao .regua{margin:26px auto 18px}
+  .secao-sub{font-size:12px;letter-spacing:.3em;text-transform:uppercase;color:var(--sepia);max-width:52ch}
+  .orn{width:54px;height:54px;margin-bottom:26px;opacity:.85}
+
+  /* ===== 3. conteúdo ===== */
+  .l-conteudo .corpo{padding:56px 88px}
+
+  /* ===== 4. duas colunas ===== */
+  .l-duas .corpo{padding:48px 76px}
+  .l-duas h2{font-size:40px}
+  .l-duas .regua{margin:20px 0 26px}
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:19px 52px}
+  .verbete b{display:block;font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:500;font-size:22px;color:var(--sepia)}
+  .verbete span{display:block;font-size:13.5px;font-weight:300;line-height:1.45;color:var(--carvao-2);margin-top:2px}
+
+  /* ===== 5. citação ===== */
+  .l-citacao .corpo{align-items:center;text-align:center;padding:56px 118px}
+  .aspas{font-family:'Cormorant Garamond',Georgia,serif;font-size:104px;line-height:.5;
+    color:var(--dourado);opacity:.4;margin-bottom:20px}
+  .l-citacao blockquote{font-family:'Cormorant Garamond',Georgia,serif;
+    font-style:italic;font-size:42px;line-height:1.28;max-width:25ch;color:var(--carvao)}
+  .l-citacao .fonte{margin-top:30px}
+
+  /* ===== 6. números ===== */
+  .l-ficha .corpo{padding:56px 88px}
+  .numeros{display:grid;grid-template-columns:repeat(4,1fr);gap:40px;margin-top:8px}
+  .numeros .n{font-family:'Cormorant Garamond',Georgia,serif;font-size:64px;line-height:1;color:var(--dourado)}
+  .numeros .rotulo{font-size:13.5px;font-weight:300;line-height:1.5;color:var(--carvao-2);margin-top:12px;
+    padding-top:12px;border-top:1px solid rgba(122,92,66,.26)}
+
+  /* ===== 7. lista de capítulos ===== */
+  .l-lista .corpo{padding:48px 88px}
+  .l-lista h2{font-size:40px}
+  .l-lista .regua{margin:20px 0 14px}
+  .cap{display:grid;grid-template-columns:76px 1fr;gap:24px;align-items:baseline;
+    padding:12px 0;border-bottom:1px solid rgba(122,92,66,.18)}
+  .cap:last-child{border-bottom:0}
+  .cap .rom{font-family:'Cormorant Garamond',Georgia,serif;font-size:25px;color:var(--dourado);text-align:right}
+  .cap b{font-family:'Cormorant Garamond',Georgia,serif;font-weight:500;font-size:23px}
+  .cap span{display:block;font-size:13.5px;font-weight:300;line-height:1.45;color:var(--carvao-2);margin-top:1px}
+
+  /* ===== 8. referências ===== */
+  .l-fim .corpo{padding:56px 88px}
+  .refs{list-style:none;display:flex;flex-direction:column;gap:15px;margin-top:4px}
+  .refs li{font-size:14.5px;font-weight:300;line-height:1.55;color:var(--carvao-2);max-width:68ch;
+    padding-left:18px;border-left:2px solid rgba(176,141,63,.55)}
+  .refs i{font-style:italic}
+
+  /* ===== impressão: 1 slide = 1 página 16:9 ===== */
+  @page{size:1280px 720px;margin:0}
+  @media print{
+    html,body{background:var(--papel);padding:0;margin:0}
+    .slide{margin:0}
+    .slide:not(:last-child){break-after:page;page-break-after:always}
+  }
+</style>
+</head>
+<body>
+
+<!-- ══════════════════ 01 · CAPA ══════════════════ -->
+<section class="slide l-capa">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="arte">
+      <svg viewBox="23 13 384 384" role="img"
+           aria-label="Silhueta de cartola do século XIX ao lado do contorno de uma ampulheta">
+        <defs>
+          <linearGradient id="gCopa" x1=".15" y1="0" x2=".9" y2="1">
+            <stop offset="0" stop-color="#2A2521"/><stop offset="1" stop-color="#141210"/>
+          </linearGradient>
+          <radialGradient id="gDisco" cx=".38" cy=".30" r=".80">
+            <stop offset="0" stop-color="#F1E6D1"/><stop offset="1" stop-color="#DFCEB0"/>
+          </radialGradient>
+        </defs>
+        <circle cx="208" cy="196" r="150" fill="url(#gDisco)" opacity=".88"/>
+        <circle cx="208" cy="196" r="165" fill="none" stroke="#B08D3F" stroke-width="1.2" opacity=".62"/>
+        <circle cx="208" cy="196" r="173" fill="none" stroke="#7A5C42" stroke-width="1" opacity=".20"/>
+        <g transform="translate(192 172) rotate(-6) translate(-200 -170)">
+          <g fill="url(#gCopa)">
+            <path d="M130 58 C130 48 270 48 270 58 C273 118 264 188 258 250
+                     C258 258 232 262 200 262 C168 262 142 258 142 250
+                     C136 188 127 118 130 58 Z"/>
+            <path d="M108 252 C116 236 152 228 200 228 C248 228 284 236 292 252
+                     C295 258 292 263 285 266 C264 275 234 279 200 279
+                     C166 279 136 275 115 266 C108 263 105 258 108 252 Z"/>
+          </g>
+          <path d="M138 199 C160 207 240 207 262 199 L260 227 C238 233 162 233 140 227 Z"
+                fill="#A8863C" opacity=".94"/>
+          <path d="M138 199 C160 207 240 207 262 199" fill="none" stroke="#D8BC7A" stroke-width="1.3" opacity=".55"/>
+          <path d="M152 60 C148 128 152 198 156 244 L168 246 C164 198 161 128 165 58 Z"
+                fill="#F3EDE1" opacity=".055"/>
+        </g>
+        <g transform="translate(342 312) scale(.86)"
+           fill="none" stroke="#B08D3F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-38 -70 L38 -70 C36 -34 14 -8 5 0 C14 8 36 34 38 70 L-38 70
+                   C-36 34 -14 8 -5 0 C-14 -8 -36 -34 -38 -70 Z"/>
+          <path d="M-30 -63 L30 -63 C27 -36 11 -14 0 -7 C-11 -14 -27 -36 -30 -63 Z"
+                fill="#7A5C42" stroke="none" opacity=".5"/>
+          <path d="M-20 64 C-18 44 -8 30 0 25 C8 30 18 44 20 64 Z"
+                fill="#7A5C42" stroke="none" opacity=".72"/>
+          <line x1="0" y1="-4" x2="0" y2="42" stroke="#7A5C42" stroke-width="1.6" opacity=".55"/>
+          <path d="M-52 -78 L52 -78" stroke-width="5"/>
+          <path d="M-52 78 L52 78" stroke-width="5"/>
+          <path d="M-44 -78 L-44 78 M44 -78 L44 78" stroke-width="1.2" opacity=".42"/>
+        </g>
+      </svg>
+    </div>
+    <div class="filete"></div>
+    <div class="capa-txt">
+      <div class="sobrelinha">Machado de Assis · 1881</div>
+      <h1>Memórias Póstumas<br>de <em>Brás Cubas</em></h1>
+      <div class="regua"></div>
+      <blockquote>“Não sou propriamente um autor defunto, mas um defunto autor, para quem a campa foi outro berço.”</blockquote>
+      <p class="fonte" style="margin-top:15px">Capítulo I — Óbito do autor</p>
+      <p class="apresentador">Apresentação de ____________ · Turma ______</p>
+    </div>
+  </div>
+  <div class="rodape"><span>Literatura Brasileira · Realismo</span><span class="num">01</span></div>
+</section>
+
+<!-- ══════════════════ 02 · NÚMEROS ══════════════════ -->
+<section class="slide l-ficha">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">O livro em números</div>
+    <h2>Uma ficha rápida</h2>
+    <div class="regua"></div>
+    <div class="numeros">
+      <div><div class="n">160</div><div class="rotulo">capítulos — quase todos curtos, alguns de poucas linhas</div></div>
+      <div><div class="n">1880</div><div class="rotulo">folhetim na <i>Revista Brasileira</i>, de março a dezembro</div></div>
+      <div><div class="n">1881</div><div class="rotulo">primeira edição em livro, pela Tipografia Nacional</div></div>
+      <div><div class="n">1</div><div class="rotulo">narrador em primeira pessoa — e ele já está morto</div></div>
+    </div>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">02</span></div>
+</section>
+
+<!-- ══════════════════ 03 · SEÇÃO I ══════════════════ -->
+<section class="slide l-secao">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <svg class="orn" viewBox="100 40 200 250" aria-hidden="true" fill="#1E1B18">
+      <path d="M130 58 C130 48 270 48 270 58 C273 118 264 188 258 250
+               C258 258 232 262 200 262 C168 262 142 258 142 250
+               C136 188 127 118 130 58 Z"/>
+      <path d="M108 252 C116 236 152 228 200 228 C248 228 284 236 292 252
+               C295 258 292 263 285 266 C264 275 234 279 200 279
+               C166 279 136 275 115 266 C108 263 105 258 108 252 Z"/>
+    </svg>
+    <div class="romano">I</div>
+    <h2>O autor e o momento</h2>
+    <div class="regua"></div>
+    <p class="secao-sub">Quem escreveu, quando, e por que 1881 muda tudo</p>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">03</span></div>
+</section>
+
+<!-- ══════════════════ 04 · MACHADO ══════════════════ -->
+<section class="slide l-conteudo">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">Quem escreve</div>
+    <h2>Machado de Assis <em>(1839–1908)</em></h2>
+    <div class="regua"></div>
+    <ul class="topicos">
+      <li>Carioca, neto de alforriados, pobre, autodidata. Começou como tipógrafo e revisor e chegou ao topo da vida literária brasileira.</li>
+      <li>Fundou a Academia Brasileira de Letras e foi seu primeiro presidente.</li>
+      <li>Escreveu em praticamente todos os gêneros: poesia, conto, crônica, teatro, crítica e romance.</li>
+      <li>Atravessou a Abolição e a Proclamação da República — e observou tudo isso com a mesma ironia fria que usa em Brás Cubas.</li>
+    </ul>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">04</span></div>
+</section>
+
+<!-- ══════════════════ 05 · FOLHETIM → LIVRO ══════════════════ -->
+<section class="slide l-conteudo">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">Como o livro nasceu</div>
+    <h2>De folhetim a livro</h2>
+    <div class="regua"></div>
+    <ul class="topicos">
+      <li>Saiu em capítulos na <b>Revista Brasileira</b>, de março a dezembro de <b>1880</b>.</li>
+      <li>Virou livro em <b>1881</b>, pela Tipografia Nacional, com a grafia da época: <i>Memorias Posthumas de Braz Cubas</i>.</li>
+      <li>Marca a virada da obra de Machado: a fase romântica dá lugar a um olhar seco, analítico e sem consolo.</li>
+      <li>É tratado como o marco inaugural do <b>Realismo</b> no Brasil.</li>
+    </ul>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">05</span></div>
+</section>
+
+<!-- ══════════════════ 06 · SEÇÃO II ══════════════════ -->
+<section class="slide l-secao">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <svg class="orn" viewBox="-60 -90 120 180" aria-hidden="true"
+         fill="none" stroke="#1E1B18" stroke-width="4" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M-38 -70 L38 -70 C36 -34 14 -8 5 0 C14 8 36 34 38 70 L-38 70
+               C-36 34 -14 8 -5 0 C-14 -8 -36 -34 -38 -70 Z"/>
+      <path d="M-52 -78 L52 -78" stroke-width="7"/>
+      <path d="M-52 78 L52 78" stroke-width="7"/>
+    </svg>
+    <div class="romano">II</div>
+    <h2>O defunto autor</h2>
+    <div class="regua"></div>
+    <p class="secao-sub">A invenção que sustenta o livro inteiro</p>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">06</span></div>
+</section>
+
+<!-- ══════════════════ 07 · O NARRADOR ══════════════════ -->
+<section class="slide l-conteudo">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">A invenção do narrador</div>
+    <h2>Quem conta já morreu</h2>
+    <div class="regua"></div>
+    <ul class="topicos">
+      <li>Brás Cubas escreve <b>depois de morto</b>. Não presta contas a ninguém, não tem reputação a defender, não precisa agradar.</li>
+      <li>Por isso pode ser cínico, mesquinho e honesto na mesma frase — e é essa liberdade que dá o tom do livro.</li>
+      <li>A morte não é o fim da história: é a <b>condição</b> para que ela possa ser contada assim.</li>
+      <li>O livro começa pelo fim — o capítulo I é o próprio velório do narrador.</li>
+    </ul>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">07</span></div>
+</section>
+
+<!-- ══════════════════ 08 · CITAÇÃO: DEDICATÓRIA ══════════════════ -->
+<section class="slide l-citacao">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="aspas">“</div>
+    <blockquote>Ao verme que primeiro roeu as frias carnes do meu cadáver dedico como saudosa lembrança estas memórias póstumas.</blockquote>
+    <p class="fonte">Dedicatória · edição de 1881, página VII</p>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">08</span></div>
+</section>
+
+<!-- ══════════════════ 09 · SEÇÃO III ══════════════════ -->
+<section class="slide l-secao">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <svg class="orn" viewBox="0 0 100 100" aria-hidden="true">
+      <path d="M50 6 L58 42 L94 50 L58 58 L50 94 L42 58 L6 50 L42 42 Z" fill="#B08D3F"/>
+      <circle cx="50" cy="50" r="44" fill="none" stroke="#1E1B18" stroke-width="2" opacity=".5"/>
+    </svg>
+    <div class="romano">III</div>
+    <h2>Forma e estilo</h2>
+    <div class="regua"></div>
+    <p class="secao-sub">Capítulos curtos, digressão e um narrador que provoca você</p>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">09</span></div>
+</section>
+
+<!-- ══════════════════ 10 · ESTILO ══════════════════ -->
+<section class="slide l-conteudo">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">Como o livro é escrito</div>
+    <h2>Ironia, digressão e o leitor</h2>
+    <div class="regua"></div>
+    <ul class="topicos">
+      <li><b>160 capítulos curtos.</b> O ritmo é de quem se interrompe o tempo todo — e a interrupção é de propósito.</li>
+      <li>Machado assume a <b>“forma livre”</b> de Laurence Sterne e Xavier de Maistre: o livro pode ir aonde quiser.</li>
+      <li>O narrador fala direto com você: provoca, acusa, pede paciência e debocha de quem está lendo.</li>
+      <li>A digressão não é desvio — é o método. O assunto verdadeiro é sempre a vaidade de quem conta.</li>
+    </ul>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">10</span></div>
+</section>
+
+<!-- ══════════════════ 11 · CAPÍTULOS ══════════════════ -->
+<section class="slide l-lista">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">Roteiro de leitura</div>
+    <h2>Cinco capítulos que ficam</h2>
+    <div class="regua"></div>
+    <div class="cap"><div class="rom">I</div>
+      <div><b>Óbito do autor</b><span>O livro abre pela morte e explica por que o narrador pode falar.</span></div></div>
+    <div class="cap"><div class="rom">VII</div>
+      <div><b>O delírio</b><span>A alucinação da agonia: um diálogo com a Natureza sobre a insignificância humana.</span></div></div>
+    <div class="cap"><div class="rom">XXXI</div>
+      <div><b>A borboleta preta</b><span>Uma cena mínima que vira uma aula sobre crueldade e indiferença.</span></div></div>
+    <div class="cap"><div class="rom">LV</div>
+      <div><b>O velho diálogo de Adão e Eva</b><span>Um capítulo quase sem palavras — a ousadia formal em estado puro.</span></div></div>
+    <div class="cap"><div class="rom">CLX</div>
+      <div><b>O último capítulo</b><span>O balanço final da vida de Brás, fechado por uma frase demolidora.</span></div></div>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">11</span></div>
+</section>
+
+<!-- ══════════════════ 12 · SEÇÃO IV ══════════════════ -->
+<section class="slide l-secao">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <svg class="orn" viewBox="0 0 100 100" aria-hidden="true" fill="none" stroke="#1E1B18" stroke-width="3">
+      <path d="M50 26 C40 16 20 16 12 24 L12 76 C20 68 40 68 50 78 C60 68 80 68 88 76 L88 24 C80 16 60 16 50 26 Z"/>
+      <path d="M50 26 L50 78" stroke="#B08D3F"/>
+    </svg>
+    <div class="romano">IV</div>
+    <h2>Gente e ideias</h2>
+    <div class="regua"></div>
+    <p class="secao-sub">Os personagens, a filosofia inventada e os temas do livro</p>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">12</span></div>
+</section>
+
+<!-- ══════════════════ 13 · QUEM É QUEM ══════════════════ -->
+<section class="slide l-duas">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">Personagens</div>
+    <h2>Quem é quem</h2>
+    <div class="regua"></div>
+    <div class="grid2">
+      <div class="verbete"><b>Virgília</b><span>O grande amor adúltero. Casa-se com Lobo Neves e move a vida de Brás sem nunca lhe pertencer.</span></div>
+      <div class="verbete"><b>Lobo Neves</b><span>O marido político: ambicioso, supersticioso, sempre a um passo do cargo que deseja.</span></div>
+      <div class="verbete"><b>Marcela</b><span>A primeira paixão, cara. “Amou-me durante quinze meses e onze contos de réis.”</span></div>
+      <div class="verbete"><b>Eugênia</b><span>“A flor da moita”: bela, pobre e coxa. Brás a descarta e passa adiante sem remorso.</span></div>
+      <div class="verbete"><b>Quincas Borba</b><span>Colega de escola virado mendigo, depois filósofo do Humanitismo.</span></div>
+      <div class="verbete"><b>Dona Plácida</b><span>A agregada que serve de fachada ao adultério e paga a vida inteira em favores.</span></div>
+      <div class="verbete"><b>Prudêncio</b><span>Escravizado que Brás montava como cavalo quando menino. Liberto, compra outro escravo e o açoita.</span></div>
+      <div class="verbete"><b>Cotrim e Sabina</b><span>O cunhado e a irmã: a família como cálculo de herança e aparência.</span></div>
+    </div>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">13</span></div>
+</section>
+
+<!-- ══════════════════ 14 · HUMANITISMO ══════════════════ -->
+<section class="slide l-conteudo">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">A filosofia de Quincas Borba</div>
+    <h2>O Humanitismo</h2>
+    <div class="regua"></div>
+    <ul class="topicos">
+      <li>Um sistema inventado por Quincas Borba: existe um princípio único, <b>Humanitas</b>, e tudo — guerra, fome, inveja — seria apenas Humanitas se alimentando de si mesma.</li>
+      <li>É <b>paródia</b>. Machado usa o sistema para ridicularizar o cientificismo e as filosofias totalizantes do século XIX.</li>
+      <li>O efeito é cruel: a doutrina serve para justificar qualquer egoísmo com ar de ciência.</li>
+      <li><b>Cuidado com a pegadinha:</b> “Ao vencedor, as batatas” <b>não</b> aparece neste livro — é do romance <i>Quincas Borba</i> (1891), onde o Humanitismo volta.</li>
+    </ul>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">14</span></div>
+</section>
+
+<!-- ══════════════════ 15 · TEMAS ══════════════════ -->
+<section class="slide l-duas">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">O que atravessa o livro</div>
+    <h2>Temas</h2>
+    <div class="regua"></div>
+    <div class="grid2">
+      <div class="verbete"><b>Vaidade</b><span>Uma vida inteira contada por quem quer ser lembrado e não fez nada digno de lembrança.</span></div>
+      <div class="verbete"><b>Egoísmo e classe</b><span>A elite do Segundo Reinado vista por dentro — sem indignação e sem defesa.</span></div>
+      <div class="verbete"><b>Escravidão</b><span>Não entra como tese, entra como paisagem: nos gestos comuns. É mais violenta por isso.</span></div>
+      <div class="verbete"><b>Morte</b><span>Nem tragédia nem consolo: apenas o lugar de onde se enxerga melhor.</span></div>
+      <div class="verbete"><b>Fracasso</b><span>O emplasto — a “ideia fixa” que faria de Brás um nome — nunca sai do papel.</span></div>
+      <div class="verbete"><b>O leitor</b><span>Cúmplice e vítima: o narrador o envolve e depois o responsabiliza pelo que achou graça.</span></div>
+    </div>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">15</span></div>
+</section>
+
+<!-- ══════════════════ 16 · CITAÇÃO FINAL ══════════════════ -->
+<section class="slide l-citacao">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="aspas">“</div>
+    <blockquote>Não tive filhos, não transmiti a nenhuma criatura o legado da nossa miséria.</blockquote>
+    <p class="fonte">Capítulo CLX — as últimas palavras do livro</p>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">16</span></div>
+</section>
+
+<!-- ══════════════════ 17 · POR QUE IMPORTA ══════════════════ -->
+<section class="slide l-conteudo">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">Para fechar</div>
+    <h2>Por que ainda importa</h2>
+    <div class="regua"></div>
+    <ul class="topicos">
+      <li>Um narrador que mente, se contradiz e ri do leitor era coisa rara em 1881 — e virou regra na literatura do século XX.</li>
+      <li>Machado não julga os personagens: entrega o julgamento a quem lê. Isso ainda incomoda.</li>
+      <li>É curto, rápido e engraçado. A leitura desmente a fama de “livro difícil”.</li>
+      <li>Termina num balanço de negativas — e mesmo assim é um dos livros mais vivos que já se escreveu em português.</li>
+    </ul>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">17</span></div>
+</section>
+
+<!-- ══════════════════ 18 · REFERÊNCIAS ══════════════════ -->
+<section class="slide l-fim">
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+  <div class="corpo">
+    <div class="sobrelinha">Referências</div>
+    <h2>De onde vem cada citação</h2>
+    <div class="regua"></div>
+    <ul class="refs">
+      <li>ASSIS, Machado de. <i>Memorias Posthumas de Braz Cubas</i>. Rio de Janeiro: Typographia Nacional, 1881.</li>
+      <li>Texto integral em domínio público: <i>Wikisource</i> — pt.wikisource.org</li>
+      <li>Todas as citações destes slides foram conferidas contra a edição de 1881; a grafia foi modernizada na apresentação.</li>
+      <li>Dados de publicação (folhetim na <i>Revista Brasileira</i>, março a dezembro de 1880) conferidos na <i>Wikipédia</i> em português.</li>
+    </ul>
+  </div>
+  <div class="rodape"><span>Memórias Póstumas de Brás Cubas</span><span class="num">18</span></div>
+</section>
+
+</body>
+</html>

@@ -22,15 +22,32 @@ HTML + SVG — vetorial, editável e exportável em qualquer resolução.
 
 | Arquivo | O que é |
 |---|---|
-| `slide.html` | o modelo em si — palco lógico de 1280×720 |
+| `deck.html` | **a apresentação completa** — 18 slides no mesmo sistema visual |
+| `slide.html` | o modelo de capa isolado — palco lógico de 1280×720 |
 | `fonts.css` + `fonts/` | subsets latinos das fontes (uso offline) |
 | `exportar.js` | exporta o HTML em PNG/JPG via Chrome headless (CDP) |
+| `export/bras-cubas-apresentacao.pdf` | **o PDF para apresentar** — 18 páginas de 13,333 × 7,5 pol |
 | `export/…-exemplo.pdf` | PDF de 1 página, 13,333 × 7,5 pol (16:9 widescreen), texto vetorial |
 | `export/…-fundo.pdf` | idem, lado direito vazio |
 | `export/…-exemplo-3840.jpg` | 3840×2160 (4K), com o texto de exemplo |
 | `export/…-fundo-3840.jpg` | 3840×2160 (4K), lado direito vazio — o arquivo para usar como fundo |
 | `export/papel-1920.jpg` | textura de papel já rasterizada, usada só na impressão |
 | `export/previa-1280.jpg` | 1280×720, só para a prévia deste README |
+
+## A apresentação (`deck.html`)
+
+18 slides, em oito layouts: capa, ficha de números, divisor de seção, conteúdo
+com tópicos, duas colunas, citação em destaque, lista de capítulos e
+referências. Para editar, é só mexer no HTML — cada slide é um `<section
+class="slide l-…">` com a classe do layout.
+
+Ordem: capa · números · **I. O autor e o momento** · Machado · folhetim→livro ·
+**II. O defunto autor** · o narrador · dedicatória · **III. Forma e estilo** ·
+estilo · cinco capítulos · **IV. Gente e ideias** · personagens · Humanitismo ·
+temas · última frase · por que importa · referências.
+
+A textura de papel do deck vem do JPG assado (`export/papel-1920.jpg`) também na
+tela: 18 camadas de `feTurbulence` ao vivo deixariam a página pesada.
 
 ## PDF
 

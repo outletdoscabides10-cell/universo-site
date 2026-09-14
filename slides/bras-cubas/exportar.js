@@ -12,6 +12,7 @@ const CHROME = process.env.CHROME_BIN
   || '/opt/pw-browsers/chromium-1194/chrome-linux/chrome';
 
 const BASE = 'file://' + path.join(__dirname, 'slide.html');
+const DECK = 'file://' + path.join(__dirname, 'deck.html');
 const OUT = path.join(__dirname, 'export');
 
 // scale = deviceScaleFactor sobre o palco de 1280x720.
@@ -26,6 +27,8 @@ const jobs = [
   { url: BASE,              out: 'previa-1280.jpg',                  scale: 1, format: 'jpeg', quality: 86 },
   { url: BASE,              out: 'bras-cubas-16x9-exemplo.pdf', pdf: true },
   { url: BASE + '?limpo=1', out: 'bras-cubas-16x9-fundo.pdf',   pdf: true },
+  // apresentacao completa: 18 slides, 1 pagina cada
+  { url: DECK,              out: 'bras-cubas-apresentacao.pdf', pdf: true },
 ];
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
