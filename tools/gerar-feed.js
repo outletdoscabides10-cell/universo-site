@@ -19,6 +19,14 @@ const esc = (s) => String(s || '')
   .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
   .replace(/"/g, '&quot;');
 
+/* g:id tem limite de 50 caracteres no Google (31 slugs estouravam, até 85).
+   Slug curto passa intacto (preserva o histórico dos itens já ingeridos);
+   longo vira 40 chars + hash do slug inteiro — estável e sem colisão. */
+const crypto = require('crypto');
+const idFeed = (slug) => slug.length <= 50
+  ? slug
+  : `${slug.slice(0, 40)}-${crypto.createHash('sha1').update(slug).digest('hex').slice(0, 8)}`;
+
 const itens = [];
 for (const p of PRODUTOS) {
   const preco = (p.preco_unit || p.preco || '').trim();
@@ -36,7 +44,7 @@ for (const p of PRODUTOS) {
     .join('\n');
 
   itens.push(`<item>
-  <g:id>${esc(p.slug)}</g:id>
+  <g:id>${esc(idFeed(p.slug))}</g:id>
   <g:title>${esc(titulo)}</g:title>
   <g:description>${esc(descricao)}</g:description>
   <g:link>${SITE}/p/${p.slug}.html</g:link>
