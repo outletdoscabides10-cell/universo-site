@@ -18,9 +18,14 @@ const OUT = path.join(__dirname, 'export');
 // 1 -> 1280x720 | 1.5 -> 1920x1080 | 3 -> 3840x2160
 // Troque format/quality para 'png' se precisar de PNG sem perda.
 const jobs = [
+  // 1º: assa a textura de papel. O CSS de impressão usa esse JPG no lugar dos
+  // filtros feTurbulence, que travam o printToPDF do Chrome.
+  { url: BASE + '?papel=1', out: 'papel-1920.jpg',                  scale: 1.5, format: 'jpeg', quality: 88 },
   { url: BASE,              out: 'bras-cubas-16x9-exemplo-3840.jpg', scale: 3, format: 'jpeg', quality: 93 },
   { url: BASE + '?limpo=1', out: 'bras-cubas-16x9-fundo-3840.jpg',   scale: 3, format: 'jpeg', quality: 93 },
   { url: BASE,              out: 'previa-1280.jpg',                  scale: 1, format: 'jpeg', quality: 86 },
+  { url: BASE,              out: 'bras-cubas-16x9-exemplo.pdf', pdf: true },
+  { url: BASE + '?limpo=1', out: 'bras-cubas-16x9-fundo.pdf',   pdf: true },
 ];
 
 const sleep = ms => new Promise(r => setTimeout(r, ms));
@@ -60,8 +65,10 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
   await send('Page.enable', {}, sessionId);
 
   for (const job of jobs) {
-    // 1280x720 é o palco lógico; deviceScaleFactor define a resolução final
-    await send('Emulation.setDeviceMetricsOverride',
+    // 1280x720 é o palco lógico; deviceScaleFactor define a resolução final.
+    // Para PDF o override de métricas atrapalha o printToPDF — limpa antes.
+    if (job.pdf) await send('Emulation.clearDeviceMetricsOverride', {}, sessionId);
+    else await send('Emulation.setDeviceMetricsOverride',
       { width: 1280, height: 720, deviceScaleFactor: job.scale, mobile: false }, sessionId);
     await send('Page.navigate', { url: job.url }, sessionId);
     for (let i = 0; i < 80; i++) {
@@ -73,13 +80,38 @@ const sleep = ms => new Promise(r => setTimeout(r, ms));
       await sleep(100);
     }
     await sleep(600); // deixa os filtros SVG (textura) assentarem
-    const shot = await send('Page.captureScreenshot', {
-      format: job.format || 'png',
-      ...(job.quality ? { quality: job.quality } : {}),
-      captureBeyondViewport: false, fromSurface: true,
-    }, sessionId);
+
+    let dados;
+    if (job.pdf) {
+      // O CSS de impressao so pede papel-1920.jpg na hora de imprimir, e o
+      // printToPDF nao espera esse fetch. Carrega a imagem antes, na marra.
+      await send('Runtime.evaluate', {
+        expression: `new Promise(function(res){
+          var i = new Image();
+          i.onload = i.onerror = function(){ res(true); };
+          i.src = 'export/papel-1920.jpg';
+        })`,
+        awaitPromise: true, returnByValue: true,
+      }, sessionId);
+      await sleep(200);
+      // 1280x720px a 96dpi = 13,333 x 7,5 pol — o 16:9 widescreen do PowerPoint
+      const r = await send('Page.printToPDF', {
+        printBackground: true, preferCSSPageSize: true,
+        paperWidth: 1280 / 96, paperHeight: 720 / 96,
+        marginTop: 0, marginBottom: 0, marginLeft: 0, marginRight: 0,
+        scale: 1,
+      }, sessionId);
+      dados = r.result.data;
+    } else {
+      const r = await send('Page.captureScreenshot', {
+        format: job.format || 'png',
+        ...(job.quality ? { quality: job.quality } : {}),
+        captureBeyondViewport: false, fromSurface: true,
+      }, sessionId);
+      dados = r.result.data;
+    }
     const dest = path.join(OUT, job.out);
-    fs.writeFileSync(dest, Buffer.from(shot.result.data, 'base64'));
+    fs.writeFileSync(dest, Buffer.from(dados, 'base64'));
     console.log('gerado:', path.relative(process.cwd(), dest));
   }
 

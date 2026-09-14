@@ -26,6 +26,20 @@
     overflow:hidden;
     font-family:'Inter',system-ui,sans-serif;
     color:var(--carvao);
+    -webkit-print-color-adjust:exact;print-color-adjust:exact;
+  }
+
+  /* ===== Impressão / PDF: uma página 16:9 exata (1280×720px = 13,333×7,5pol) ===== */
+  @page{size:1280px 720px;margin:0}
+  @media print{
+    html,body{background:var(--papel)}
+    .slide{
+      position:relative;break-inside:avoid;page-break-inside:avoid;
+      /* Os filtros feTurbulence travam o printToPDF do Chrome; no PDF a mesma
+         textura entra como imagem já rasterizada e o texto segue vetorial. */
+      background:var(--papel) url("export/papel-1920.jpg") center/100% 100% no-repeat;
+    }
+    .mancha,.fibra,.grao,.vinheta{display:none}
   }
 
   /* ---- textura de papel ---- */
@@ -118,6 +132,11 @@
 
   /* ===== Modos de template: ?vazio (com guia) e ?limpo (nada) ===== */
   body.limpo .texto > *{visibility:hidden}
+
+  /* ?papel=1 — só as camadas de fundo; usado para assar a textura em JPG */
+  body.papel .grade,
+  body.papel .rodape,
+  body.papel .moldura{display:none}
   .guia{display:none}
   body.vazio .texto > *{visibility:hidden}
   body.vazio .guia{
@@ -240,7 +259,8 @@
 
 <script>
   var q=location.search;
-  if(q.indexOf('limpo')>-1)document.body.classList.add('limpo');
+  if(q.indexOf('papel')>-1)document.body.classList.add('papel');
+  else if(q.indexOf('limpo')>-1)document.body.classList.add('limpo');
   else if(q.indexOf('vazio')>-1)document.body.classList.add('vazio');
 </script>
 </body>

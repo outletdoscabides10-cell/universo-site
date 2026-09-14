@@ -25,9 +25,24 @@ HTML + SVG — vetorial, editável e exportável em qualquer resolução.
 | `slide.html` | o modelo em si — palco lógico de 1280×720 |
 | `fonts.css` + `fonts/` | subsets latinos das fontes (uso offline) |
 | `exportar.js` | exporta o HTML em PNG/JPG via Chrome headless (CDP) |
+| `export/…-exemplo.pdf` | PDF de 1 página, 13,333 × 7,5 pol (16:9 widescreen), texto vetorial |
+| `export/…-fundo.pdf` | idem, lado direito vazio |
 | `export/…-exemplo-3840.jpg` | 3840×2160 (4K), com o texto de exemplo |
-| `export/…-fundo-3840.jpg` | 3840×2160 (4K), lado direito vazio — é o arquivo para usar como fundo |
+| `export/…-fundo-3840.jpg` | 3840×2160 (4K), lado direito vazio — o arquivo para usar como fundo |
+| `export/papel-1920.jpg` | textura de papel já rasterizada, usada só na impressão |
 | `export/previa-1280.jpg` | 1280×720, só para a prévia deste README |
+
+## PDF
+
+`export/bras-cubas-16x9-exemplo.pdf` e `…-fundo.pdf` têm **uma página de
+13,333 × 7,5 pol** — exatamente o tamanho de slide 16:9 widescreen do PowerPoint
+e do Google Slides, então importam sem borda nem redimensionamento. O texto
+continua vetorial (dá para selecionar e copiar).
+
+Um detalhe do caminho: os filtros `feTurbulence` da textura travam o
+`printToPDF` do Chrome. Por isso o `exportar.js` primeiro assa a textura em
+`export/papel-1920.jpg` (modo `?papel=1`) e o CSS de `@media print` usa esse JPG
+no lugar dos filtros. O papel vira imagem; todo o resto segue vetor.
 
 ## Três modos
 
@@ -36,6 +51,7 @@ Abra `slide.html` no navegador:
 - `slide.html` — com o texto de exemplo preenchido
 - `slide.html?vazio=1` — esconde o texto e mostra a caixa-guia tracejada
 - `slide.html?limpo=1` — esconde tudo do lado direito (é o que gera o `fundo`)
+- `slide.html?papel=1` — só as camadas de fundo (usado para assar a textura)
 
 ## Como editar
 
