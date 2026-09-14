@@ -3,6 +3,26 @@
   var ano = document.getElementById('ano');
   if (ano) ano.textContent = new Date().getFullYear();
 
+  /* medição própria — mesma tabela do main.js (site_visitas, INSERT-only) */
+  try {
+    var sess = sessionStorage.getItem('univ_sess');
+    if (!sess) {
+      sess = Math.random().toString(36).slice(2, 10);
+      sessionStorage.setItem('univ_sess', sess);
+    }
+    fetch('https://dzupvekojufcrrryjqbn.supabase.co/rest/v1/site_visitas', {
+      method: 'POST',
+      headers: { apikey: 'sb_publishable_rJy4GSoT3w2iIPyqfx3t0Q_vkGgm8IW',
+        Authorization: 'Bearer sb_publishable_rJy4GSoT3w2iIPyqfx3t0Q_vkGgm8IW',
+        'Content-Type': 'application/json' },
+      body: JSON.stringify({ pagina: location.pathname,
+        ref: (document.referrer || '').slice(0, 180),
+        utm: new URLSearchParams(location.search).get('utm_source') || '',
+        sessao: sess }),
+      keepalive: true,
+    }).catch(function () {});
+  } catch (e) { /* medição nunca quebra a página */ }
+
   /* galeria */
   var palco = document.getElementById('ppImg');
   document.querySelectorAll('.pp-thumb').forEach(function (b) {

@@ -29,6 +29,25 @@ const SUPA_KEY = 'sb_publishable_rJy4GSoT3w2iIPyqfx3t0Q_vkGgm8IW';
 const esc = (s) => s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;');
 const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
+/* Medição própria (zero cookie de terceiro): 1 registro por página vista.
+   Sem isso a gente não sabe nem quantas pessoas entram — voando às cegas. */
+(function medirVisita() {
+  try {
+    let sess = sessionStorage.getItem('univ_sess');
+    if (!sess) {
+      sess = Math.random().toString(36).slice(2, 10);
+      sessionStorage.setItem('univ_sess', sess);
+    }
+    const utm = new URLSearchParams(location.search).get('utm_source') || '';
+    fetch(`${SUPA_URL}/rest/v1/site_visitas`, {
+      method: 'POST',
+      headers: { apikey: SUPA_KEY, Authorization: `Bearer ${SUPA_KEY}`, 'Content-Type': 'application/json' },
+      body: JSON.stringify({ pagina: location.pathname, ref: (document.referrer || '').slice(0, 180), utm, sessao: sess }),
+      keepalive: true,
+    }).catch(() => {});
+  } catch (e) { /* medição nunca pode quebrar o site */ }
+})();
+
 const precoNum = (s) => parseFloat(s.replace(/\./g, '').replace(',', '.'));
 const money = (n) => n.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
 
