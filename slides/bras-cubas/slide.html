@@ -1,0 +1,247 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex">
+<title>Memórias Póstumas de Brás Cubas — Modelo de Slide 16:9</title>
+<link rel="stylesheet" href="fonts.css">
+<style>
+  :root{
+    --carvao:#1E1B18;
+    --carvao-2:#3A332C;
+    --sepia:#7A5C42;
+    --sepia-2:#A98A6B;
+    --dourado:#B08D3F;
+    --dourado-2:#D8BC7A;
+    --papel:#F3EDE1;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html,body{background:#26231F}
+
+  /* ===== Palco 16:9 (1280×720 = 1920×1080 = 3840×2160) ===== */
+  .slide{
+    position:absolute;top:0;left:0;
+    width:1280px;height:720px;
+    background:var(--papel);
+    overflow:hidden;
+    font-family:'Inter',system-ui,sans-serif;
+    color:var(--carvao);
+  }
+
+  /* ---- textura de papel ---- */
+  .fibra{position:absolute;inset:0;opacity:.26;mix-blend-mode:multiply;z-index:2;pointer-events:none}
+  .grao {position:absolute;inset:0;opacity:.50;mix-blend-mode:multiply;z-index:3;pointer-events:none}
+  .mancha{
+    position:absolute;inset:0;z-index:1;pointer-events:none;
+    background:
+      radial-gradient(46% 56% at 14% 16%, rgba(200,175,133,.26), rgba(200,175,133,0) 72%),
+      radial-gradient(42% 52% at 86% 88%, rgba(148,118,82,.18), rgba(148,118,82,0) 72%);
+  }
+  .vinheta{
+    position:absolute;inset:0;z-index:4;pointer-events:none;
+    background:radial-gradient(122% 100% at 50% 44%, rgba(0,0,0,0) 54%, rgba(92,70,46,.10) 88%, rgba(58,42,26,.17) 100%);
+  }
+
+  /* ---- moldura editorial ---- */
+  .moldura{position:absolute;inset:34px;border:1px solid rgba(122,92,66,.26);z-index:5;pointer-events:none}
+  .moldura i{position:absolute;width:15px;height:15px;border:1px solid var(--dourado);opacity:.75}
+  .moldura i:nth-child(1){top:-1px;left:-1px;border-right:0;border-bottom:0}
+  .moldura i:nth-child(2){top:-1px;right:-1px;border-left:0;border-bottom:0}
+  .moldura i:nth-child(3){bottom:-1px;left:-1px;border-right:0;border-top:0}
+  .moldura i:nth-child(4){bottom:-1px;right:-1px;border-left:0;border-top:0}
+
+  /* ===== Grade ===== */
+  .grade{
+    position:absolute;inset:34px 34px 80px;z-index:6;
+    display:grid;grid-template-columns:452px 1px 1fr;
+  }
+
+  /* ---- coluna 1: ilustração ---- */
+  .arte{display:flex;align-items:center;justify-content:center}
+  .arte svg{width:420px;height:420px;display:block}
+
+  /* ---- coluna 2: filete ---- */
+  .filete{
+    background:linear-gradient(to bottom,
+      rgba(122,92,66,0) 0%, rgba(122,92,66,.28) 12%,
+      rgba(176,141,63,.60) 50%,
+      rgba(122,92,66,.28) 88%, rgba(122,92,66,0) 100%);
+  }
+
+  /* ---- coluna 3: área de texto ---- */
+  .texto{
+    position:relative;
+    display:flex;flex-direction:column;justify-content:center;
+    padding:56px 56px 56px 64px;
+  }
+  .sobrelinha{
+    display:flex;align-items:center;gap:16px;
+    font-size:11px;font-weight:500;letter-spacing:.32em;text-transform:uppercase;
+    color:var(--sepia);margin-bottom:24px;
+  }
+  .sobrelinha::after{content:"";height:1px;flex:1;background:linear-gradient(to right,rgba(176,141,63,.75),rgba(176,141,63,0))}
+
+  h1{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-weight:500;font-size:62px;line-height:1.03;letter-spacing:-.006em;
+  }
+  h1 em{font-style:italic;color:var(--sepia)}
+
+  .regua{width:72px;height:2px;background:var(--dourado);margin:26px 0 20px}
+
+  blockquote{
+    font-family:'Cormorant Garamond',Georgia,serif;
+    font-size:24px;font-style:italic;line-height:1.42;color:var(--sepia);
+    max-width:31ch;
+  }
+  .fonte{
+    margin-top:15px;font-size:10px;letter-spacing:.24em;text-transform:uppercase;color:var(--sepia-2);opacity:.85;
+  }
+
+  .topicos{list-style:none;margin-top:32px;display:flex;flex-direction:column;gap:16px}
+  .topicos li{
+    display:flex;align-items:flex-start;gap:14px;
+    font-size:15px;font-weight:300;line-height:1.5;color:var(--carvao-2);max-width:46ch;
+  }
+  .topicos li::before{
+    content:"";flex:0 0 auto;width:6px;height:6px;margin-top:7px;
+    background:var(--dourado);transform:rotate(45deg);
+  }
+
+  /* ---- rodapé ---- */
+  .rodape{
+    position:absolute;left:34px;right:34px;bottom:34px;height:46px;z-index:7;
+    display:flex;align-items:center;justify-content:space-between;padding:0 26px;
+    font-size:10px;letter-spacing:.26em;text-transform:uppercase;color:var(--sepia-2);
+  }
+  .rodape .num{font-family:'Cormorant Garamond',Georgia,serif;font-size:19px;letter-spacing:.06em;color:var(--sepia)}
+
+  /* ===== Modos de template: ?vazio (com guia) e ?limpo (nada) ===== */
+  body.limpo .texto > *{visibility:hidden}
+  .guia{display:none}
+  body.vazio .texto > *{visibility:hidden}
+  body.vazio .guia{
+    display:block;visibility:visible;
+    position:absolute;inset:44px 46px 44px 56px;
+    border:1px dashed rgba(122,92,66,.32);
+  }
+  body.vazio .guia span{
+    position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+    font-size:10px;letter-spacing:.3em;text-transform:uppercase;color:rgba(122,92,66,.5);
+  }
+</style>
+</head>
+<body>
+<div class="slide">
+
+  <div class="mancha"></div>
+  <svg class="fibra" viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+    <filter id="fFibra"><feTurbulence type="fractalNoise" baseFrequency="0.9 0.013" numOctaves="3" seed="7"/>
+      <feColorMatrix values="0 0 0 0 .42 0 0 0 0 .32 0 0 0 0 .20 0 0 0 .5 0"/></filter>
+    <rect width="1280" height="720" filter="url(#fFibra)"/>
+  </svg>
+  <svg class="grao" viewBox="0 0 1280 720" preserveAspectRatio="none" aria-hidden="true">
+    <filter id="fGrao"><feTurbulence type="fractalNoise" baseFrequency="0.78" numOctaves="4" seed="19"/>
+      <feColorMatrix values="0 0 0 0 .38 0 0 0 0 .29 0 0 0 0 .19 0 0 0 .40 0"/></filter>
+    <rect width="1280" height="720" filter="url(#fGrao)"/>
+  </svg>
+  <div class="vinheta"></div>
+  <div class="moldura"><i></i><i></i><i></i><i></i></div>
+
+  <div class="grade">
+
+    <!-- ========== ILUSTRAÇÃO ========== -->
+    <div class="arte">
+      <svg viewBox="23 13 384 384" role="img"
+           aria-label="Silhueta de cartola do século XIX ao lado do contorno de uma ampulheta">
+        <defs>
+          <linearGradient id="gCopa" x1=".15" y1="0" x2=".9" y2="1">
+            <stop offset="0" stop-color="#2A2521"/><stop offset="1" stop-color="#141210"/>
+          </linearGradient>
+          <radialGradient id="gDisco" cx=".38" cy=".30" r=".80">
+            <stop offset="0" stop-color="#F1E6D1"/><stop offset="1" stop-color="#DFCEB0"/>
+          </radialGradient>
+        </defs>
+
+        <!-- disco sépia + anéis -->
+        <circle cx="208" cy="196" r="150" fill="url(#gDisco)" opacity=".88"/>
+        <circle cx="208" cy="196" r="165" fill="none" stroke="#B08D3F" stroke-width="1.2" opacity=".62"/>
+        <circle cx="208" cy="196" r="173" fill="none" stroke="#7A5C42" stroke-width="1" opacity=".20"/>
+
+        <!-- ===== cartola ===== -->
+        <g transform="translate(192 172) rotate(-6) translate(-200 -170)">
+          <g fill="url(#gCopa)">
+            <!-- copa -->
+            <path d="M130 58 C130 48 270 48 270 58
+                     C273 118 264 188 258 250
+                     C258 258 232 262 200 262
+                     C168 262 142 258 142 250
+                     C136 188 127 118 130 58 Z"/>
+            <!-- aba -->
+            <path d="M108 252 C116 236 152 228 200 228
+                     C248 228 284 236 292 252
+                     C295 258 292 263 285 266
+                     C264 275 234 279 200 279
+                     C166 279 136 275 115 266
+                     C108 263 105 258 108 252 Z"/>
+          </g>
+          <!-- fita dourada -->
+          <path d="M138 199 C160 207 240 207 262 199 L260 227 C238 233 162 233 140 227 Z"
+                fill="#A8863C" opacity=".94"/>
+          <path d="M138 199 C160 207 240 207 262 199" fill="none" stroke="#D8BC7A" stroke-width="1.3" opacity=".55"/>
+          <!-- reflexo discreto -->
+          <path d="M152 60 C148 128 152 198 156 244 L168 246 C164 198 161 128 165 58 Z"
+                fill="#F3EDE1" opacity=".055"/>
+        </g>
+
+        <!-- ===== ampulheta ===== -->
+        <g transform="translate(342 312) scale(.86)"
+           fill="none" stroke="#B08D3F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M-38 -70 L38 -70 C36 -34 14 -8 5 0 C14 8 36 34 38 70 L-38 70
+                   C-36 34 -14 8 -5 0 C-14 -8 -36 -34 -38 -70 Z"/>
+          <path d="M-30 -63 L30 -63 C27 -36 11 -14 0 -7 C-11 -14 -27 -36 -30 -63 Z"
+                fill="#7A5C42" stroke="none" opacity=".5"/>
+          <path d="M-20 64 C-18 44 -8 30 0 25 C8 30 18 44 20 64 Z"
+                fill="#7A5C42" stroke="none" opacity=".72"/>
+          <line x1="0" y1="-4" x2="0" y2="42" stroke="#7A5C42" stroke-width="1.6" opacity=".55"/>
+          <path d="M-52 -78 L52 -78" stroke-width="5"/>
+          <path d="M-52 78 L52 78" stroke-width="5"/>
+          <path d="M-44 -78 L-44 78 M44 -78 L44 78" stroke-width="1.2" opacity=".42"/>
+        </g>
+
+      </svg>
+    </div>
+
+    <!-- ========== FILETE ========== -->
+    <div class="filete"></div>
+
+    <!-- ========== TEXTO ========== -->
+    <div class="texto">
+      <div class="guia"><span>Área reservada para título e tópicos</span></div>
+
+      <div class="sobrelinha">Machado de Assis · 1881</div>
+      <h1>Memórias Póstumas<br>de <em>Brás Cubas</em></h1>
+      <div class="regua"></div>
+      <blockquote>“Não sou propriamente um autor defunto, mas um defunto autor, para quem a campa foi outro berço.”</blockquote>
+      <p class="fonte">Capítulo I — Óbito do autor</p>
+      <ul class="topicos">
+        <li>O defunto autor e a liberdade da narração póstuma</li>
+        <li>Ironia, digressão e a ruptura com o romantismo brasileiro</li>
+        <li>O Humanitismo de Quincas Borba como sátira filosófica</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="rodape">
+    <span>Literatura Brasileira · Realismo</span>
+    <span class="num">01</span>
+  </div>
+</div>
+
+<script>
+  var q=location.search;
+  if(q.indexOf('limpo')>-1)document.body.classList.add('limpo');
+  else if(q.indexOf('vazio')>-1)document.body.classList.add('vazio');
+</script>
+</body>
+</html>
