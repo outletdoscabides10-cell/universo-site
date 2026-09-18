@@ -14,7 +14,7 @@ TITULO = "BIOLOGIA FORENSE"
 SUBTITULO = "a contribuição das ciências biológicas para a perícia criminal"
 PROFESSORA = "Profa. Cristina"
 DISCIPLINA = "Biologia"
-INSTITUICAO = "[NOME DA INSTITUIÇÃO DE ENSINO]"
+INSTITUICAO = "COLÉGIO CONDE DOMINGOS"
 CIDADE = "SÃO PAULO"
 ANO = "2026"
 
