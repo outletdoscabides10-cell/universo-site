@@ -526,7 +526,7 @@ async function calcularFrete() {
     });
   box.innerHTML = '<p class="frete-erro">Calculando...</p>';
   try {
-    const r = await fetch(`${BACKEND_SITE}/frete`, {
+    const r = await fetchMotor(`/frete`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ cep, itens }),
@@ -799,6 +799,18 @@ cartItemsEl.addEventListener('click', (e) => {
 
 /* ---- Fechamento do pedido (WhatsApp ou pagamento online) ---- */
 const BACKEND_SITE = 'https://motor.universodoscabides.com.br/site';
+const BACKEND_RESERVA = 'https://ml-reclamacoes-mediacoes.onrender.com/site';
+
+/* Reserva automática (24/09/2026): o motor titular é a VM da empresa. Se ela não
+   responder (queda/reinício), a MESMA chamada repete no Render — cliente não perde
+   o frete nem o pagamento. */
+async function fetchMotor(rota, opcoes) {
+  try {
+    const r = await fetch(`${BACKEND_SITE}${rota}`, opcoes);
+    if (![502, 503, 504, 520, 521, 522, 523, 524, 525, 526, 530].includes(r.status)) return r;
+  } catch (e) { /* VM inalcançável — tenta a reserva */ }
+  return fetch(`${BACKEND_RESERVA}${rota}`, opcoes);
+}
 
 function dadosDoCarrinho() {
   const nome = document.getElementById('cartNome').value.trim();
@@ -870,7 +882,7 @@ document.getElementById('cartPayOnline').addEventListener('click', async () => {
   }
 
   try {
-    const r = await fetch(`${BACKEND_SITE}/checkout`, {
+    const r = await fetchMotor(`/checkout`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ pedido_id: pedidoId, itens: d.itens, frete: d.frete, cupom: d.cupom ? d.cupom.codigo : null }),
