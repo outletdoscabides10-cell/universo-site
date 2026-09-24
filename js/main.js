@@ -798,7 +798,7 @@ cartItemsEl.addEventListener('click', (e) => {
 });
 
 /* ---- Fechamento do pedido (WhatsApp ou pagamento online) ---- */
-const BACKEND_SITE = 'https://ml-reclamacoes-mediacoes.onrender.com/site';
+const BACKEND_SITE = 'https://motor.universodoscabides.com.br/site';
 
 function dadosDoCarrinho() {
   const nome = document.getElementById('cartNome').value.trim();
